@@ -1,38 +1,40 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-  <div class="container-fluid">
-    <%= link_to "#", class: "navbar-brand" do %>
-      <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" %>
-    <% end %>
-
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto">
-        <% if user_signed_in? %>
-          <li class="nav-item active">
-            <%= link_to "Home", "#", class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Messages", "#", class: "nav-link" %>
-          </li>
-          <li class="nav-item dropdown">
-          <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown menu" %>
-          </a>
-            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "Action", "#", class: "dropdown-item" %>
-              <%= link_to "Another action", "#", class: "dropdown-item" %>
-              <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
-            </div>
-          </li>
+<% if user_signed_in? %>
+  <div class="navbar navbar-expand-sm navbar-danger navbar-lewagon d-flex justify-content-between border-1 border-bottom border-danger">
+    <div class="mx-2">
+      <i class="fa-solid fa-guitar fa-2xl" style="color: #6b0f1a;"></i>
+    </div>
+    <div class="mx-2 ">
+      <a href="#" class="avatar text-decoration-none" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <% if current_user.photo.attached? %>
+          <h4 class="text-danger text-capitalize mt-2 text-decoration-none" id="nombre">
+            <%= current_user.first_name %>  <%=cl_image_tag current_user.photo.key, class: "avatar", alt: "dropdown menu" %>
+          <h4>
         <% else %>
-          <li class="nav-item">
-            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
-          </li>
+          <h4 class="text-danger text-capitalize mt-2 text-decoration-none">
+          <%= current_user.first_name %>  <img src="https://gopostr.s3.amazonaws.com/favicon_url/bvnowNkxrBEJWo1QyPAeSz0vDNa8hajfTgPKTP7m.png" class="avatar" alt="dropdown menu">
+          <h4>
         <% end %>
-      </ul>
+        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+          <%= link_to "Profile", dashboard_path, class: "dropdown-item text-danger btn btn-danger" %>
+          <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item text-danger btn btn-danger" %>
+        </div>
+      </a>
     </div>
   </div>
-</div>
+<% else %>
+  <div class="navbar navbar-expand-sm navbar-danger navbar-lewagon d-flex justify-content-between border-1 border-bottom border-danger">
+    <i class="fa-solid fa-guitar fa-2xl" style="color: #6b0f1a;"> Instrumates</i>
+    <div class="d-flex">
+      <div class="mx-0">
+        <%= link_to new_user_session_path, class: "nav-link"  do%>
+          <span>🟥 Login  </span>
+        <% end %>
+      </div>
+      <div class="mx-3">
+        <%= link_to new_user_registration_path, class: "nav-link"  do %>
+          <span> 🟩 Register </span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

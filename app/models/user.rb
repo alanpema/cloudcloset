@@ -9,7 +9,7 @@ class User < ApplicationRecord
   has_many :items, dependent: :destroy
   has_many :owner_bookings, class_name: "Booking", dependent: :destroy
 
-
+  has_one_attached :photo
 
   has_many :closets, dependent: :destroy
   has_many :host_bookings, through: :closets, source: :bookings, dependent: :destroy
