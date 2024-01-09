@@ -17,6 +17,7 @@ class User < ApplicationRecord
   def owner?
     role == "owner"
   end
+
   def host?
     role == "host"
   end
