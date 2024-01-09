@@ -10,4 +10,5 @@ class PagesController < ApplicationController
     @bookings_as_owner = Booking.joins(:instrument).where(items: { user_id: current_user.id })
     @item = Item.new
   end
+
 end
