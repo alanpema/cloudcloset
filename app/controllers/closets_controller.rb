@@ -31,6 +31,16 @@ class ClosetsController < ApplicationController
     @closet.destroy
   end
 
+def index
+  @closets = Closet.all
+  @markers = @closets.geocoded.map do |closet|
+    {
+      lat: closet.latitude,
+      lng: closet.longitude
+    }
+  end
+end
+
   private
 
   def closet_params
