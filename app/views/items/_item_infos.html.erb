@@ -1,0 +1,25 @@
+
+<div class="item-card" data-controller="edit-item" data-edit-item-target="card">
+  <%= cl_image_tag item.photo.key, style: "height: 120px; width:200px;"%>
+  <div class="item-infos" data-edit-item-target="infos">
+      <p><%= item.name %></p>
+      <p><%= item.item_type %></p>
+      <p><%= item.fragility %></p>
+      <p><%= item.size %></p>
+      <input class="form-check-input" type="checkbox" id="check1" name="option1" value="something" checked>
+      <button aria-label="Edit item">
+        <i class="fa-solid fa-pen fa-xs ml-2" data-action="click->edit-item#displayForm"></i>
+      </button>
+  </div>
+
+  <%= simple_form_for item, html: {class: "d-none"},
+    data: {
+    edit_item_target: "form",
+    action: "submit->edit-item#update"} do |f| %>
+      <%= f.input :name, label:"Name" %>
+      <%= f.input :item_type, as: :select, collection: Item::ITEM_TYPE, label:"Type" %>
+      <%= f.input :fragility, as: :select, collection: Item::FRAGILITY, label:"Fragility" %>
+      <%= f.input :size, as: :select, collection: Item::SIZE, label:"Size" %>
+      <%= f.submit class: "btn btn-outline-danger" %>
+    <% end %>
+</div>
