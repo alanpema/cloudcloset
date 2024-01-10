@@ -13,6 +13,11 @@ class ClosetsController < ApplicationController
     @closet = Closet.new(closet_params)
     @closet.user = current_user
     @closet.save
+    if @closet.save
+      redirect_to dashboard_path
+    else
+      render :new
+    end
   end
 
   def update
@@ -29,6 +34,6 @@ class ClosetsController < ApplicationController
   private
 
   def closet_params
-    params.require(:closet).permit(:name, :location, :features, :accessibility, :state, :availability, :status, :user_id)
+    params.require(:closet).permit(:name, :location, :features, :accessibility, :state, :availability, :status, :user_id, :photo)
   end
 end

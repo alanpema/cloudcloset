@@ -1,7 +1,39 @@
-
-
+<div class="container my-3">
+  <div class="justify-content-center">
+    <div class="col-lg-12 col-md-10 col-sm-12 bg-white tp-2 shadow d-flex justify-content-between">
+      <div class="d-flex">
+        <div>
+          <%= cl_image_tag current_user.photo.key, class: "rounded img-fluid border-2 ", style: "height: 100px; width:105px;" %>
+        </div>
+        <div class= "mx-3 mt-3">
+          <div class="d-flex">
+            <h4> <%= current_user.first_name %> <%= current_user.last_name %> </h4>
+            <p class="mx-3"> Email: <%= current_user.email %> </p>
+            <p> Whatsapp: <%= current_user.phone_number %> </p>
+          </div>
+          <div class="d-flex">
+        
+            <p> Location: <%= current_user.location %> </p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <%= link_to "Log out", destroy_user_session_path, class: "btn btn-danger" %>
+      </div>
+    </div>
+  </div>
+</div>
 <% if current_user.host? %>
-  <h3>Host</h3>
+
+  <% current_user.closets.each do |closet| %>
+    <div class="container my-4">
+      <div class="row d-flex justify-content-center">
+        <div class="col-6 bg-white p-4 shadow">
+          <%= cl_image_tag closet.photo.key %>
+        </div>
+      </div>
+    </div>
+  <% end %>
 <% else %>
   <h3>I'm an Owner</h3>
 
@@ -9,8 +41,7 @@
   <div class="row d-flex justify-content-center">
     <div class="col-6 bg-white p-4 shadow">
         <%= simple_form_for(@item) do |f| %>
-        <h3>Item form</h3>
-
+        <h3> Item form </h3>
           <%= f.input :name, label:"Name" %>
           <%= f.input :item_type, as: :select, collection: Item::ITEM_TYPE, label:"Type" %>
           <%= f.input :fragility, as: :select, collection: Item::FRAGILITY, label:"Fragility" %>
@@ -35,4 +66,3 @@
           <%end%>
 
 <% end %>
-

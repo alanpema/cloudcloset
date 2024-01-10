@@ -25,6 +25,11 @@
                 autofocus: true,
                 input_html: { autocomplete: "email" },
                 placeholder: "sponge@bob.tech"%>
+    <%= f.input :location,
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "location" },
+                placeholder: "Bikini Bottom"%>
     <%= f.input :role, as: :select, collection: User::ROLES, label:"Owner/Host" %>
     <%= f.input :password,
                 required: true,
@@ -36,7 +41,7 @@
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, "Sign up" %>
+    <%= f.button :submit, link_to "Register", dashboard_path %>
   </div>
 <% end %>
 

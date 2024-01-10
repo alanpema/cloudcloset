@@ -15,10 +15,10 @@ class User < ApplicationRecord
   has_many :host_bookings, through: :closets, source: :bookings, dependent: :destroy
 
   def owner?
-    role == "owner"
+    role == "Owner"
   end
 
   def host?
-    role == "host"
+    role == "Host"
   end
 end
