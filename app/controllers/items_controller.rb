@@ -27,9 +27,11 @@ class ItemsController < ApplicationController
 
   def update
     @item = Item.find(params[:id])
-    @item.update(item_params)
-    @item.save
-    redirect_to dashboard_path
+    @item.update!(item_params)
+    respond_to do |format|
+      format.html { redirect_to items_path }
+      format.text { render partial: "items/item_infos", locals: {item: @item}, formats: [:html] }
+    end
   end
 
   def destroy
