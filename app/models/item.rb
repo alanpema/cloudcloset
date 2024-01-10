@@ -1,7 +1,7 @@
 class Item < ApplicationRecord
   belongs_to :user, dependent: :destroy
   belongs_to :booking, dependent: :destroy, optional: true
-  validates :name, :item_type, :fragility, :size, presence: true
+  validates :name, :item_type, :fragility, :size, :photo, presence: true
 
   ITEM_TYPE = %w(Box Suitcase Sofa Table Chair Bed Desk Bicycle)
   FRAGILITY = %w(Yes No)
@@ -10,5 +10,5 @@ class Item < ApplicationRecord
   validates :item_type, inclusion: { in: ITEM_TYPE }
   validates :fragility, inclusion: { in: FRAGILITY }
   validates :size, inclusion: { in: SIZE }
-
+  has_one_attached :photo
 end

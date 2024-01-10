@@ -11,5 +11,4 @@ class PagesController < ApplicationController
     @item = Item.new
     @closet = Closet.new
   end
-
 end
