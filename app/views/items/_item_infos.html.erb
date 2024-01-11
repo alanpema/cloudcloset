@@ -6,12 +6,12 @@
       <p><%= item.item_type %></p>
       <p><%= item.fragility %></p>
       <p><%= item.size %></p>
-      <input class="form-check-input" type="checkbox" id="check1" name="option1" value="something" checked>
+      <%= check_box_tag item.id %>
+      <%= @selected_items << item if params[:selected_item] %>
       <button aria-label="Edit item">
         <i class="fa-solid fa-pen fa-xs ml-2" data-action="click->edit-item#displayForm"></i>
       </button>
   </div>
-
   <%= simple_form_for item, html: {class: "d-none"},
     data: {
     edit_item_target: "form",

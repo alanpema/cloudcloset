@@ -40,6 +40,10 @@ class ItemsController < ApplicationController
     redirect_to dashboard_path
   end
 
+  def checkbox_items
+    @selected_items = []
+  end
+
   private
 
   def item_params

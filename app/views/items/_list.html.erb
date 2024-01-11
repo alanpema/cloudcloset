@@ -8,7 +8,7 @@
   </p>
   <div class="items">
     <% current_user.items.each do |item| %>
-
+    <% selected_items = [] %>
       <%= render "items/item_infos", item: item %>
     <% end %>
   </div>
