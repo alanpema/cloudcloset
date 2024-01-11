@@ -1,22 +1,23 @@
 
-<div class="item-card" data-controller="edit-item" data-edit-item-target="card">
+<div class="item-card" data-controller="items" data-items-target="card">
   <%= cl_image_tag item.photo.key, style: "height: 120px; width:200px;"%>
-  <div class="item-infos" data-edit-item-target="infos">
+  <div class="item-infos" data-items-target="infos">
       <p><%= item.name %></p>
       <p><%= item.item_type %></p>
       <p><%= item.fragility %></p>
       <p><%= item.size %></p>
-      <%= check_box_tag item.id %>
+      <%= check_box_tag item.id, data: {action: "change->items#cacheItem", "items-target": "checkboxItem"} %>
       <%= @selected_items << item if params[:selected_item] %>
       <button aria-label="Edit item">
-        <i class="fa-solid fa-pen fa-xs ml-2" data-action="click->edit-item#displayForm"></i>
+        <i class="fa-solid fa-pen fa-xs ml-2" data-action="click->items#displayForm"></i>
       </button>
   </div>
   <%= simple_form_for item, html: {class: "d-none"},
     data: {
-    edit_item_target: "form",
-    action: "submit->edit-item#update"} do |f| %>
+    items_target: "form",
+    action: "submit->items#update"} do |f| %>
       <%= f.input :name, label:"Name" %>
+      <%= f.input :photo, as: :file, label: "Item picture 📷" %>
       <%= f.input :item_type, as: :select, collection: Item::ITEM_TYPE, label:"Type" %>
       <%= f.input :fragility, as: :select, collection: Item::FRAGILITY, label:"Fragility" %>
       <%= f.input :size, as: :select, collection: Item::SIZE, label:"Size" %>

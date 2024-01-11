@@ -40,6 +40,13 @@ class ItemsController < ApplicationController
     redirect_to dashboard_path
   end
 
+  def get_item
+    @item = Item.find(params[:id])
+    respond_to do |format|
+      format.text { render partial: "items/item_infos", locals: {item: @item}, formats: [:html] }
+    end
+  end
+
   def checkbox_items
     @selected_items = []
   end

@@ -55,16 +55,30 @@
       </div>
     </div>
 
-
-  <div data-controller="edit-item-checkbox">
-  <%= render "items/list", items: @items %>
+  <div>
+    <%= render "items/list", items: @items %>
   </div>
+  <%= link_to "Continue Booking", closets_path, class: "btn btn-primary" %>
   <% end %>
 
-  <form action="/closets" accept-charset="UTF-8" method="get">
+  <div>
+    <p>My Bookings</p>
+    <%= current_user.bookings.each do |booking| %>
+      <p> <%= booking.closet.name %> </p>
+      <p> <%= booking.pick_up %> </p>
+      <p> <%= booking.drop_off %> </p>
+      <%= booking.items.each do |item| %>
+        <p> <%= item.name %> </p>
+      <% end %>
+    <% end %>
+  </div>
+
+
+
+  <%# <form action="/closets" accept-charset="UTF-8" method="get">
     <input id="hidden-input" name="selected_ids" value= "item.id" type="hidden">
     <input name="create booking" type="submit">
-  </form>
+  </form> %>
 </div>
 
 </div>
