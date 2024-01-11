@@ -1,0 +1,30 @@
+<div class="container my-4" data-controller="items">
+  <div class="row d-flex justify-content-center" data-controller="bookings">
+    <div class="col-6 bg-white p-4 shadow">
+        <div>
+          <p>Closet Info:</p>
+          <%= @closet.name %>
+        </div>
+        <div>
+          <p>Items:</p>
+          <div data-items-target="items" class="items">
+          </div>
+          <div class="items-pop">
+          <button data-action= "click->items#popup" id="showPopup">Add Item</button>
+        <div data-items-target ="popup" id="popup" style="display: none; position: fixed; width: 200px; height: 200px; background: white; border: 1px solid black; z-index: 1000;">
+          <p>This is a popup!</p>
+          <button id="closePopup">Close</button>
+        </div>
+        </div>
+        </div>
+        <div data-bookings-target="datesForm">
+          <%= simple_form_for([@closet, @booking]) do |f| %>
+            <%= f.input :pick_up, label: "Pick_up" %>
+            <%= f.input :drop_off, label:"Drop_off" %>
+            <%= f.input :items, as: :hidden, input_html: { value: current_user.items.to_json, data: { "bookings-target": "items" } } %>
+            <%= f.submit "Book Closet", class: "btn btn-outline-danger" %>
+          <% end %>
+        </div>
+    </div>
+  </div>
+</div>

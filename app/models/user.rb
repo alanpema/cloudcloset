@@ -8,6 +8,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :items, dependent: :destroy
   has_many :owner_bookings, class_name: "Booking", dependent: :destroy
+  has_many :bookings, dependent: :destroy
 
   has_one_attached :photo
 

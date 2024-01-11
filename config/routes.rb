@@ -9,12 +9,13 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   get "dashboard", to: "pages#dashboard"
-  resources :items, only: [:show, :new, :create, :edit, :update, :destroy, :index] do
+  get "get_item/:id", to: "items#get_item", as: :get_item
+  resources :items, only: [:show, :new, :create, :edit, :update, :destroy, :index]
+
+  resources :closets, only: [:show, :new, :create, :update, :destroy, :index] do
     resources :bookings, only: [:new, :create, :show, :edit, :update]
   end
   resources :bookings, only: [:destroy]
-
-  resources :closets, only: [:show, :new, :create, :update, :destroy, :index]
 
   # Defines the root path route ("/")
   # root "posts#index"
