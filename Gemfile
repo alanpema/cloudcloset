@@ -2,6 +2,8 @@ source "https://rubygems.org"
 
 ruby "3.1.2"
 
+gem "rails_admin", "3.0"
+
 gem "cloudinary"
 
 gem "devise"
@@ -80,3 +82,4 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+gem "sassc-rails"
