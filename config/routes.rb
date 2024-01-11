@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   end
   resources :bookings, only: [:destroy]
 
-  resources :closets, only: [:show, :new, :create, :update, :destroy]
+  resources :closets, only: [:show, :new, :create, :update, :destroy, :index]
 
   # Defines the root path route ("/")
   # root "posts#index"
