@@ -37,7 +37,9 @@ def index
   @markers = @closets.geocoded.map do |closet|
     {
       lat: closet.latitude,
-      lng: closet.longitude
+      lng: closet.longitude,
+      info_window_html: render_to_string(partial: "info_window", locals: {closet: closet}),
+      marker_html: render_to_string(partial: "marker", locals: {closet: closet})
     }
   end
 end
