@@ -27,9 +27,3 @@ export default class extends Controller {
       })
   }
 }
-
-const itemsbooking = document.getElementById('hidden-input').setAttribute('value', [0])
-
-itemsbooking.addEventListener('click', () => {
-  const itemsbooking = document.getElementById('hidden-input').setAttribute('value', [0])
-  });

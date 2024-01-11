@@ -5,7 +5,9 @@
         <%= simple_form_for(@closet) do |f| %>
           <%= f.input :photo, as: :file, label: "Add different room pictures" %>
           <%= f.input :name, label: "Name your closet" %>
-          <%= f.input :location, label: "Where is your closet?" %>
+          <%= f.input :location,
+            input_html: {data: {address_autocomplete_target: "address"}, class: "d-none"},
+            wrapper_html: {data: {controller: "address-autocomplete", address_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"]}},label:"Pick up location 📍" %>
           <%= f.input :features, label: "Describe your closet" %>
           <%= f.input :accessibility, label: "How easy is your closet to reach?" %>
           <%= f.input :state, label: "Tell us about your closet space" %>
