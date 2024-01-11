@@ -33,6 +33,7 @@ class ClosetsController < ApplicationController
 
 def index
   @closets = Closet.all
+  @selected_ids = params[:selected_ids]
   @markers = @closets.geocoded.map do |closet|
     {
       lat: closet.latitude,
