@@ -11,7 +11,7 @@
           <h5 class="card-title text-danger"><%= closet.name %></h5>
           <p class="card-text lh-1"><small>location: <%= closet.location %></small></p>
           <p class="card-text lh-1"><small>features: <%= closet.features %></small></p>
-          <p class="card-text lh-1"><small>Accesibility: $<%= closet.accessibility %></small></p>
+          <p class="card-text lh-1"><small>Accesibility: <%= closet.accessibility %></small></p>
           <p class="card-text lh-1"><small>state: <%= closet.state %></small></p>
           <p class="card-text lh-1"><small>price: $<%= closet.status %></small></p>
           <%= link_to "Send booking request", new_closet_booking_path(closet.id), class:"text-decoration-none d-flex justify-content-end text-danger" %>
