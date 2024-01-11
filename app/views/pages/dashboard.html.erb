@@ -2,9 +2,11 @@
   <div class="justify-content-center">
     <div class="col-lg-12 col-md-10 col-sm-12 bg-white tp-2 shadow d-flex justify-content-between">
       <div class="d-flex">
+        <% if current_user.photo.attached? %>
         <div>
           <%= cl_image_tag current_user.photo.key, class: "rounded img-fluid border-2 ", style: "height: 100px; width:105px;" %>
         </div>
+        <% end %>
         <div class= "mx-3 mt-3">
           <div class="d-flex">
             <h4> <%= current_user.first_name %> <%= current_user.last_name %> </h4>
