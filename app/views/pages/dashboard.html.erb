@@ -53,7 +53,16 @@
       </div>
     </div>
 
-<button type="button">Create booking</button>
-<div><%= render "items/list", items: @items %></div>
-<% end %>
+
+  <div data-controller="edit-item-checkbox">
+  <%= render "items/list", items: @items %>
   </div>
+  <% end %>
+
+  <form action="/closets" accept-charset="UTF-8" method="get">
+    <input id="hidden-input" name="selected_ids" value= "item.id" type="hidden">
+    <input name="create booking" type="submit">
+  </form>
+</div>
+
+</div>
