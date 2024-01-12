@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_11_223832) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_11_235615) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -55,6 +56,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_11_223832) do
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
+  create_table "closet_reviews", force: :cascade do |t|
+    t.string "comment"
+    t.integer "rating"
+    t.bigint "closet_id", null: false
+    t.bigint "reviewer_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["closet_id"], name: "index_closet_reviews_on_closet_id"
+    t.index ["reviewer_id"], name: "index_closet_reviews_on_reviewer_id"
+  end
+
   create_table "closets", force: :cascade do |t|
     t.string "name"
     t.string "location"
@@ -87,6 +99,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_11_223832) do
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 
+  create_table "user_reviews", force: :cascade do |t|
+    t.string "comment"
+    t.integer "rating"
+    t.bigint "reviewer_id", null: false
+    t.bigint "reviewee_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["reviewee_id"], name: "index_user_reviews_on_reviewee_id"
+    t.index ["reviewer_id"], name: "index_user_reviews_on_reviewer_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -110,7 +133,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_11_223832) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "bookings", "closets"
   add_foreign_key "bookings", "users"
+  add_foreign_key "closet_reviews", "closets"
+  add_foreign_key "closet_reviews", "users", column: "reviewer_id"
   add_foreign_key "closets", "users"
   add_foreign_key "items", "bookings"
   add_foreign_key "items", "users"
+  add_foreign_key "user_reviews", "users", column: "reviewee_id"
+  add_foreign_key "user_reviews", "users", column: "reviewer_id"
 end
