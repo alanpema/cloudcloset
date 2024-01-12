@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users
 
-  resources :user_reviews, only: [:new, :create, :show, :update, :destroy, :index]
+  resources :user_reviews, only: [:create, :update, :destroy]
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

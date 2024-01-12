@@ -46,32 +46,37 @@
           <%= render "items/new", items: @items, redirect: true, closet: nil %>
       </div>
     </div>
-
-  <div>
-    <%= render "items/list", items: @items %>
   </div>
+    <%= render "items/list", items: @items %>
+  <div>
   <%= link_to "Continue Booking", closets_path, class: "btn btn-primary" %>
   <% end %>
+  </div>
 
   <div>
     <p>My Bookings</p>
     <% current_user.bookings.each do |booking| %>
-      <p> <%= booking.status %> </p>
-      <p> <%= booking.closet.name %> </p>
-      <p> <%= booking.pick_up %> </p>
-      <p> <%= booking.drop_off %> </p>
-      <% booking.items.each do |item| %>
-        <p> <%= item.name %> </p>
-      <% end %>
+      <div class="container my-4">
+        <div class="row d-flex justify-content-center">
+          <div class="col-6 bg-white p-4 shadow">
+            <p> <%= booking.status %> </p>
+            <p> <%= booking.closet.name %> </p>
+            <p> <%= booking.pick_up %> </p>
+            <p> <%= booking.drop_off %> </p>
+          <% booking.items.each do |item| %>
+            <p> <%= item.name %> </p>
+          <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="btn btn-outline-primary">
+        <%= link_to "See al info", closet_booking_path(booking.closet, booking) %>
+      </div>
     <% end %>
   </div>
-
 
 
   <%# <form action="/closets" accept-charset="UTF-8" method="get">
     <input id="hidden-input" name="selected_ids" value= "item.id" type="hidden">
     <input name="create booking" type="submit">
   </form> %>
-</div>
-
-</div>

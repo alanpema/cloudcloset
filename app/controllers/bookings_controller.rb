@@ -1,6 +1,7 @@
 class BookingsController < ApplicationController
   def show
     @booking = Booking.find(params[:id])
+    @user_review = UserReview.new
   end
 
   def new
