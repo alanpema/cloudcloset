@@ -17,7 +17,7 @@ class BookingsController < ApplicationController
     @booking.status = "payment_pending"
     if @booking.save
       append_items
-      calculate_final_price(@booking)
+      #calculate_final_price(@booking)
       redirect_to confirmation_path(@booking)
       flash[:notice] = "Your booking has been created"
     else

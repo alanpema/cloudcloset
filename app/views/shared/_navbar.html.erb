@@ -1,16 +1,16 @@
 <% if user_signed_in? %>
-  <div class="navbar navbar-expand-sm navbar-danger navbar-lewagon d-flex justify-content-between border-1 border-bottom border-danger">
+  <div class="navbar navbar-expand-sm navbar-danger navbar-lewagon d-flex justify-content-between border-1 border-bottom border-primary">
     <div class="mx-2">
-      <i class="fa-solid fa-guitar fa-2xl" style="color: #6b0f1a;"></i>
+      <i class="fa-solid fa-cloud fa-2xl" style="color: #ADD8E6;"></i>
     </div>
     <div class="mx-2 ">
       <a href="#" class="avatar text-decoration-none" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <% if current_user.photo.attached? %>
-          <h4 class="text-danger text-capitalize mt-2 text-decoration-none" id="nombre">
+          <h4 class="text-primary text-capitalize mt-2 text-decoration-none" id="nombre">
             <%= current_user.first_name %>  <%=cl_image_tag current_user.photo.key, class: "avatar", alt: "dropdown menu" %>
           <h4>
         <% else %>
-          <h4 class="text-danger text-capitalize mt-2 text-decoration-none">
+          <h4 class="text-primary text-capitalize mt-2 text-decoration-none">
           <%= current_user.first_name %>  <img src="https://gopostr.s3.amazonaws.com/favicon_url/bvnowNkxrBEJWo1QyPAeSz0vDNa8hajfTgPKTP7m.png" class="avatar" alt="dropdown menu">
           <h4>
         <% end %>
@@ -22,8 +22,8 @@
     </div>
   </div>
 <% else %>
-  <div class="navbar navbar-expand-sm navbar-danger navbar-lewagon d-flex justify-content-between border-1 border-bottom border-danger">
-    <i class="fa-solid fa-guitar fa-2xl" style="color: #6b0f1a;"> Instrumates</i>
+  <div class="navbar navbar-expand-sm navbar-danger navbar-lewagon d-flex justify-content-between border-1 border-bottom border-primary">
+    <i class="fa-solid fa-cloud fa-2xl" style="color: #ADD8E6;"> CloudCloset</i>
     <div class="d-flex">
       <div class="mx-0">
         <%= link_to new_user_session_path, class: "nav-link"  do%>
