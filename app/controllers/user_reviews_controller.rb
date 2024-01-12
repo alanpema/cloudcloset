@@ -7,8 +7,10 @@ class UserReviewsController < ApplicationController
   def create
     @user_review = UserReview.new(user_review_params)
     @user_review.reviewer = current_user
-    @user_review.reviewee = # El que creo el booking  @user = User.find(params[:user_id])
+    @booking = Booking.find(params[:user_review][:booking_id])
+    @user_review.reviewee = @booking.user
     @user_review.save!
+    redirect_to dashboard_path
   end
 
   def destroy

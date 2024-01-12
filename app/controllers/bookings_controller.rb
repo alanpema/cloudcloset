@@ -1,6 +1,7 @@
 class BookingsController < ApplicationController
   def show
     @booking = Booking.find(params[:id])
+    @user_review = UserReview.new
   end
 
   def new
@@ -16,10 +17,10 @@ class BookingsController < ApplicationController
     @booking.user = current_user
     @booking.status = "payment_pending"
     if @booking.save
-      append_items
-      calculate_final_price(@booking)
-      redirect_to confirmation_path(@booking)
-      flash[:notice] = "Your booking has been created"
+     # append_items
+      #calculate_final_price(@booking)
+      ##redirect_to confirmation_path(@booking)
+      #flash[:notice] = "Your booking has been created"
     else
       render :new
     end
