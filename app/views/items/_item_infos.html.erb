@@ -6,6 +6,7 @@
       <p><%= item.item_type %></p>
       <p><%= item.fragility %></p>
       <p><%= item.size %></p>
+      <p> <%= link_to "🗑️ Delete", dashboard_path(item), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class:"text-decoration-none d-flex justify-content-end text-secondary"%> </p>
       <%= check_box_tag item.id, data: {action: "change->items#cacheItem", "items-target": "checkboxItem"} %>
       <%= @selected_items << item if params[:selected_item] %>
       <button aria-label="Edit item">
