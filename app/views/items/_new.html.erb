@@ -1,0 +1,13 @@
+<%= simple_form_for(@item) do |f| %>
+  <h3>Item form</h3>
+  <%= f.input :photo, as: :file, label: "Item picture 📷" %>
+  <%= f.input :name, label:"Name" %>
+  <%= f.input :item_type, as: :select, collection: Item::ITEM_TYPE, label:"Type" %>
+  <%= f.input :fragility, as: :select, collection: Item::FRAGILITY, label:"Fragility" %>
+  <%= f.input :size, as: :select, collection: Item::SIZE, label:"Size" %>
+
+  <%= f.hidden_field :redirect, value: redirect %>
+  <%= f.hidden_field :closet, value: closet&.id %>
+
+  <%= f.submit class: "btn btn-outline-danger" %>
+<% end %>

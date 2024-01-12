@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   get "dashboard", to: "pages#dashboard"
+  get "confirmation/:id", to: "pages#confirmation", as: :confirmation
   get "get_item/:id", to: "items#get_item", as: :get_item
   resources :items, only: [:show, :new, :create, :edit, :update, :destroy, :index]
 

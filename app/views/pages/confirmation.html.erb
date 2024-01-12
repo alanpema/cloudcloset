@@ -1,0 +1,4 @@
+<h1>Pay</h1>
+
+<%= @booking.closet.name %>
+<%= link_to "Pay", closet_booking_path(@booking, payment: true), data: { turbo_method: :patch } %>

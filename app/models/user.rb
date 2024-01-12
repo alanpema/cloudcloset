@@ -22,4 +22,10 @@ class User < ApplicationRecord
   def host?
     role == "Host"
   end
+
+  def not_booked_items
+    items.select do |item|
+      item.booking.nil?
+    end
+  end
 end
