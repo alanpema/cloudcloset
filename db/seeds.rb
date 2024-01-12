@@ -136,7 +136,7 @@ host = User.create!(
   role: "Host",
   first_name: "Host",
   last_name: "Test",
-  phone_number: "1234567890",
+  phone_number: "12345623222",
   location: "Toronto"
 )
 
