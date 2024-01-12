@@ -7,7 +7,7 @@
     <% end %>
   </p>
   <div class="items">
-    <% current_user.items.each do |item| %>
+    <% current_user.not_booked_items.each do |item| %>
       <%= render "items/item_infos", item: item %>
     <% end %>
   </div>

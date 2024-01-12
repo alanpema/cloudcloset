@@ -9,4 +9,8 @@ export default class extends Controller {
     const itemsInput = document.querySelector('[name="booking[items][]"]');
     this.itemsTarget.value = JSON.stringify(itemIds);
   }
+
+  resetCache() {
+    localStorage.removeItem("items");
+  }
 }

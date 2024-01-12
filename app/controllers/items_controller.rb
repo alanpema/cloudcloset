@@ -8,7 +8,7 @@ class ItemsController < ApplicationController
     @item = Item.new(item_params)
     @item.user = current_user
     @item.save!
-    redirect_to dashboard_path
+    handle_redirect
   end
 
   def new
@@ -52,6 +52,14 @@ class ItemsController < ApplicationController
   end
 
   private
+
+  def handle_redirect
+    if params[:redirect] == "true"
+      redirect_to dashboard_path
+    else
+      redirect_to new_closet_booking_path(Closet.find(params["item"]["closet"]), item: @item)
+    end
+  end
 
   def item_params
     params.require(:item).permit(:name, :item_type, :fragility, :state, :size, :sell_price, :status, :photo)

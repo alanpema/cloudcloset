@@ -3,6 +3,8 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="items"
 export default class extends Controller {
   static targets = ["infos", "form", "card", "checkboxItem", "items", "popup"]
+  static values = { neededCaching: Number }
+
   connect() {
     this.checkboxItemTargets.forEach((checkbox) => {
       checkbox.checked = JSON.parse(localStorage.getItem("items"))?.includes(checkbox.id)
@@ -11,10 +13,6 @@ export default class extends Controller {
     if (this.hasItemsTarget) {
       this.displayCachedItems()
     }
-  }
-
-  initialize() {
-    this.isOpen = true;
   }
 
   displayCachedItems() {
@@ -68,17 +66,6 @@ export default class extends Controller {
   }
 
   popup() {
-    console.log("popup")
-    console.log(this.popupTarget)
-    this.isOpen? this.hidePopup() : this.showPopup()
-    this.isOpen = !this.isOpen
-  }
-
-  showPopup() {
-    this.popupTarget.classList.remove("d-none")
-  }
-
-  hidePopup() {
-    this.popupTarget.classList.add("d-none")
+    this.popupTarget.classList.toggle("d-none")
   }
 }
