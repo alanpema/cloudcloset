@@ -11,4 +11,10 @@ class PagesController < ApplicationController
     @item = Item.new
     @closet = Closet.new
   end
+
+  def confirmation
+    @booking = Booking.find(params[:id])
+    return if @booking.user != current_user
+
+  end
 end

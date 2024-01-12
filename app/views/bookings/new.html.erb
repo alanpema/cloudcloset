@@ -1,0 +1,31 @@
+<div class="container my-4" data-controller="items">
+  <div class="row d-flex justify-content-center" data-controller="bookings">
+    <div class="col-6 bg-white p-4 shadow">
+        <div>
+          <p>Closet Info:</p>
+          <%= @closet.name %>
+        </div>
+        <div>
+          <p>Items:</p>
+            <div data-items-target="items" data-item-id="<%= params["item"] %>" class="items"></div>
+            <div class="items-pop">
+              <button data-action="click->items#popup">Add Item</button>
+                <div data-items-target="popup" class="d-none">
+                  <div class="popup-content">
+                    <%= render "items/new", items: @items, redirect: true, closet: @closet %>
+                  </div>
+                </div>
+            </div>
+          </div>
+
+        <div data-bookings-target="datesForm">
+          <%= simple_form_for([@closet, @booking]) do |f| %>
+            <%= f.input :pick_up, label: "Pick_up" %>
+            <%= f.input :drop_off, label:"Drop_off" %>
+            <%= f.input :items, as: :hidden, input_html: { value: current_user.items.to_json, data: { "bookings-target": "items" } } %>
+            <%= f.submit "Book Closet", class: "btn btn-outline-danger", data: { "action": "click->bookings#resetCache" } %>
+          <% end %>
+        </div>
+    </div>
+  </div>
+</div>

@@ -11,6 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.1].define(version: 2024_01_11_235615) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -93,6 +94,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_11_235615) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "booking_id"
+    t.index ["booking_id"], name: "index_items_on_booking_id"
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 
@@ -133,6 +136,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_11_235615) do
   add_foreign_key "closet_reviews", "closets"
   add_foreign_key "closet_reviews", "users", column: "reviewer_id"
   add_foreign_key "closets", "users"
+  add_foreign_key "items", "bookings"
   add_foreign_key "items", "users"
   add_foreign_key "user_reviews", "users", column: "reviewee_id"
   add_foreign_key "user_reviews", "users", column: "reviewer_id"

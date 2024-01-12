@@ -12,6 +12,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :items, dependent: :destroy
   has_many :owner_bookings, class_name: "Booking", dependent: :destroy
+  has_many :bookings, dependent: :destroy
 
   has_one_attached :photo
 
@@ -31,5 +32,11 @@ class User < ApplicationRecord
 
   def host?
     role == "Host"
+  end
+
+  def not_booked_items
+    items.select do |item|
+      item.booking.nil?
+    end
   end
 end
