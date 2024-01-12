@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users
+
+  resources :user_reviews, only: [:new, :create, :show, :update, :destroy, :index]
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -14,7 +16,9 @@ Rails.application.routes.draw do
   end
   resources :bookings, only: [:destroy]
 
-  resources :closets, only: [:show, :new, :create, :update, :destroy, :index]
+  resources :closets, only: [:show, :new, :create, :update, :destroy, :index] do
+    resources :closet_reviews, only: [:new, :create, :show, :edit, :update, :index, :destroy]
+  end
 
   # Defines the root path route ("/")
   # root "posts#index"
