@@ -5,7 +5,6 @@ class ClosetReviewsController < ApplicationController
   end
 
   def create
-    raise
     @closet = Closet.find(params[:closet_id])
     @closet_review = ClosetReview.new(closet_review_params)
     @closet_review.closet = @closet

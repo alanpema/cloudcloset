@@ -16,7 +16,12 @@ Rails.application.routes.draw do
   resources :items, only: [:show, :new, :create, :edit, :update, :destroy, :index]
 
   resources :closets, only: [:show, :new, :create, :update, :destroy, :index] do
-    resources :bookings, only: [:new, :create, :show, :edit, :update]
+    resources :bookings, only: [:new, :create, :show, :edit, :update] do
+      member do
+        patch :accepted
+        patch :declined
+      end
+    end
     resources :closet_reviews, only: [:new, :create, :show, :edit, :update, :index, :destroy]
   end
   resources :bookings, only: [:destroy]

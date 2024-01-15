@@ -29,6 +29,7 @@ class ClosetsController < ApplicationController
   def destroy
     @closet = Closet.find(params[:id])
     @closet.destroy
+    redirect_to dashboard_path
   end
 
 def index
