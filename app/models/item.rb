@@ -4,22 +4,23 @@ class Item < ApplicationRecord
   validates :name, :item_type, :fragility, :size, :photo, presence: true
 
   ITEM_TYPE = %w(Box Suitcase Sofa Table Chair Bed Desk Bicycle TV Fridge Washing\ Machine)
-  ITEM_TYPE_PRICES = {
-    "Box" => 5,
-    "Suitcase" => 10,
-    "Sofa" => 20,
-    "Table" => 20,
-    "Chair" => 10,
-    "Bed" => 30,
-    "Desk" => 20,
-    "Bicycle" => 20,
+  TYPE_PRICES = {
+    "Box" => 0.5,
+    "Suitcase" => 0.6,
+    "Chair" => 0.7,
+    "Bicycle" => 0.7,
+    "Table" => 0.9,
+    "Desk" => 0.9,
+    "Sofa" => 1,
+    "Bed" => 1,
   }
   FRAGILITY = %w(Yes No)
+
   SIZE = %w(Small Medium Large)
   SIZE_PRICES = {
-    "Small" => 0.5,
-    "Medium" => 1,
-    "Large" => 2
+    "Small" => 1,
+    "Medium" => 1.5,
+    "Large" => 2,
   }
 
   validates :item_type, inclusion: { in: ITEM_TYPE }
