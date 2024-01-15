@@ -36,9 +36,8 @@ class ItemsController < ApplicationController
 
   def destroy
     @item = Item.find(params[:id])
-    if @item.destroy!
-      redirect_to dashboard_path
-    end
+    @item.destroy
+    redirect_to dashboard_path
   end
 
   def get_item

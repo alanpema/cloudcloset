@@ -1,5 +1,5 @@
 class Item < ApplicationRecord
-  belongs_to :user, dependent: :destroy
+  belongs_to :user
   belongs_to :booking, dependent: :destroy, optional: true
   validates :name, :item_type, :fragility, :size, :photo, presence: true
 

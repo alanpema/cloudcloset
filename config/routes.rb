@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   resources :closets, only: [:show, :new, :create, :update, :destroy, :index] do
     resources :bookings, only: [:new, :create, :show, :edit, :update]
-     resources :closet_reviews, only: [:new, :create, :show, :edit, :update, :index, :destroy]
+    resources :closet_reviews, only: [:new, :create, :show, :edit, :update, :index, :destroy]
   end
   resources :bookings, only: [:destroy]
 
