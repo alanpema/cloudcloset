@@ -32,6 +32,10 @@
             <%= f.submit "Book Closet", class: "btn btn-outline-danger", data: { "action": "click->bookings#resetCache" } %>
           <% end %>
         </div>
+          <p><%=@booking.items.size  %></p><%= params["item"] %>
+        <div>
+          <p></p>
+        </div>
     </div>
   </div>
 </div>
