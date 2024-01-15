@@ -5,9 +5,11 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = Item.new(item_params)
-    @item.user = current_user
-    @item.save!
+    params[:item][:multiple].to_i.times do
+      @item = Item.new(item_params)
+      @item.user = current_user
+      @item.save!
+    end
     handle_redirect
   end
 

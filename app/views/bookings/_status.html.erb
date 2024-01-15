@@ -1,0 +1,9 @@
+<% if booking.payment_pending? %>
+  <span class="badge bg-warning text-dark">Payment Pending</span>
+<% elsif booking.accepted? %>
+  <span class="badge bg-success text-white">Accepted</span>
+<% elsif booking.declined? %>
+  <span class="badge bg-danger text-white">Rejected</span>
+<% elsif booking.acceptance_pending? %>
+  <span class="badge bg-warning text-dark">Acceptance Pending</span>
+<% end %>

@@ -17,8 +17,8 @@ class BookingsController < ApplicationController
     @booking = Booking.new(booking_params)
     @booking.closet = @closet
     @booking.user = current_user
-    @booking.status = "payment_pending"
     if @booking.save
+      @booking.update(status: 0)
       append_items
       calculate_final_price
       redirect_to confirmation_path(@booking)
@@ -41,10 +41,22 @@ class BookingsController < ApplicationController
     @booking.destroy
   end
 
+  def accepted
+    @booking = Booking.find(params[:id])
+    @booking.update(status: 2)
+    redirect_to dashboard_path
+  end
+
+  def declined
+    @booking = Booking.find(params[:id])
+    @booking.update(status: 3)
+    redirect_to dashboard_path
+  end
+
   private
 
   def payment_process
-    @booking.update(status: "acceptance_pending")
+    @booking.update(status: 1)
     redirect_to dashboard_path
   end
 
