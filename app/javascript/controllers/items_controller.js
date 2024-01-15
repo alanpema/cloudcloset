@@ -6,6 +6,18 @@ export default class extends Controller {
   static values = { neededCaching: Number }
 
   connect() {
+    if (document.querySelector("[data-item-id]") && document.querySelector("[data-item-id]").dataset.itemId.length > 0) {
+      let itemId = document.querySelector("[data-item-id]").dataset.itemId;
+      let items = JSON.parse(localStorage.getItem("items")) || [];
+      if (items.includes(itemId)) {
+        let index = items.indexOf(itemId);
+        items.splice(index, 1);
+      } else {
+        items.push(itemId);
+      }
+      localStorage.setItem("items", JSON.stringify(items));
+    }
+
     this.checkboxItemTargets.forEach((checkbox) => {
       checkbox.checked = JSON.parse(localStorage.getItem("items"))?.includes(checkbox.id)
     })
@@ -13,6 +25,11 @@ export default class extends Controller {
     if (this.hasItemsTarget) {
       this.displayCachedItems()
     }
+  }
+
+  cacheItem() {
+    debugger
+
   }
 
   displayCachedItems() {
@@ -66,6 +83,7 @@ export default class extends Controller {
   }
 
   popup() {
+    console.log(this.popupTarget.classList);
     this.popupTarget.classList.toggle("d-none")
   }
 }

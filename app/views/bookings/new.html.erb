@@ -10,11 +10,11 @@
             <div data-items-target="items" data-item-id="<%= params["item"] %>" class="items"></div>
             <div class="items-pop">
               <button data-action="click->items#popup">Add Item</button>
-                <div data-items-target="popup" class="d-none">
-                  <div class="popup-content">
-                    <%= render "items/new", items: @items, redirect: true, closet: @closet %>
-                  </div>
+              <div data-items-target="popup" class="d-none">
+                <div class="popup-content">
+                  <%= render "items/new", items: @items, redirect: true, closet: @closet %>
                 </div>
+              </div>
             </div>
           </div>
 
