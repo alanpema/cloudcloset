@@ -40,7 +40,13 @@ export default class extends Controller {
         fetch(`/get_item/${item}`)
           .then(response => response.text())
           .then((data) => {
-            this.itemsTarget.insertAdjacentHTML("beforeend", data)
+            if (data.includes("error")) {
+              let index = items.indexOf(item);
+              items.splice(index, 1);
+              localStorage.setItem("items", JSON.stringify(items));
+            } else {
+              this.itemsTarget.insertAdjacentHTML("beforeend", data)
+            }
           })
       })
     }
