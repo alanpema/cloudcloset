@@ -5,7 +5,7 @@ class Booking < ApplicationRecord
 
   validates :pick_up, :drop_off, presence: true
 
-  enum status: [:payment_pending, :acceptance_pending, :accepted, :rejected, :cancelled]
+  enum status: [:payment_pending, :acceptance_pending, :accepted, :rejected]
 
   def get_dates_in_range(start_date, end_date)
     require 'date'
