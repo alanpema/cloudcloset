@@ -28,9 +28,9 @@
 
 
 <% if current_user.host? %>
-<div class="btn btn-outline-primary">
-  <%= link_to "Request a new closet", new_closet_path %>
-</div>
+  <div class="btn btn-outline-primary">
+    <%= link_to "Request a new closet", new_closet_path %>
+  </div>
 
   <% current_user.closets.each do |closet| %>
   <div class="container my-3">
@@ -42,10 +42,9 @@
           </div>
           <div class= "mx-3 mt-3">
             <div class="d-flex">
-              <p> <%= closet.name %>
-              </p>
-              <p> <%= closet.location %>
-              </p>
+              <p> <%= closet.name %></p>
+              <p> <%= closet.location %></p>
+              
             </div>
           </div>
         </div>

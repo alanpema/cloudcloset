@@ -1,12 +1,39 @@
-<div class="container my-4">
-  <div class="row d-flex justify-content-center">
-    <div class="col-6 bg-white p-4 shadow">
-        <%= simple_form_for(@user_review) do |f| %>
-          <%= f.input :comment, label:"Leave a comment" %>
-          <%= f.input :rating, as: :range, class:"form-range", label:"Rate your experience" %>
-          <%= f.hidden_field :booking_id, value: @booking.id %>
-          <%= f.submit class: "btn btn-outline-danger" %>
-        <% end %>
+<% if current_user.host? %>
+
+  <h1>user review</h1>
+
+  <div class="container my-4">
+    <div class="row d-flex justify-content-center">
+      <div class="col-6 bg-white p-4 shadow">
+          <%= simple_form_for(@user_review) do |f| %>
+            <%= f.input :comment, label:"Leave a comment" %>
+            <%= f.input :rating, as: :range, class:"form-range", min: 1, max: 5, label:"Rate your experience" %>
+            <%= f.hidden_field :booking_id, value: @booking.id %>
+            <%= f.submit class: "btn btn-outline-danger" %>
+          <% end %>
+      </div>
     </div>
   </div>
-</div>
+
+<% else %>
+
+  <h1>closet review</h1>
+
+  <div class="container my-4">
+    <div class="row d-flex justify-content-center">
+      <div class="col-6 bg-white p-4 shadow">
+          <%= simple_form_for([@closet, @closet_review]) do |f| %>
+            <%= f.input :comment, label:"Leave a comment" %>
+            <label for="rating" class="form-label">Rate <%=@closet.name %> ⭐⭐⭐⭐⭐</label>
+            <input type="range" class="form-range" min="1" max="5" id="rating" name="rating">
+            <div class="d-flex justify-content-between">
+              <p>Really bad</p>
+              <p>Excellent</p>
+            </div>
+            <%= f.submit class: "btn btn-outline-danger" %>
+          <% end %>
+      </div>
+    </div>
+  </div>
+
+<% end %>
