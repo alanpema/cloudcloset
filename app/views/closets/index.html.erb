@@ -1,20 +1,38 @@
 <div>
   <% @closets.each do |closet| %>
-    <div class=" col-9 col-md-3 mb-4 me-5">
-      <div class="card d-flex flex-row col-3" style="width: 36rem; height:240px">
+    <div class="col-9 col-md-3 p-3">
+      <div class="card-closet p-2" style="width: 35rem; border-raduis: 10px">
         <% if closet.photo.attached? %>
-        <div>
-          <%= cl_image_tag closet.photo.key, style: "height: 240px; width: 240px;" %>
-        </div>
+           <%= cl_image_tag closet.photo.key, class: "card-img-top", style: "height: 200px; width: 100%; object-fit: cover;", alt: "Card image cap" %>
         <% end %>
-        <div class="card-body ">
-          <h5 class="card-title text-danger"><%= closet.name %></h5>
-          <p class="card-text lh-1"><small>location: <%= closet.location %></small></p>
-          <p class="card-text lh-1"><small>features: <%= closet.features %></small></p>
-          <p class="card-text lh-1"><small>Accesibility: <%= closet.accessibility %></small></p>
-          <p class="card-text lh-1"><small>state: <%= closet.state %></small></p>
-          <p class="card-text lh-1"><small>price: $<%= closet.status %></small></p>
-          <%= link_to "Send booking request", new_closet_booking_path(closet.id), class:"text-decoration-none d-flex justify-content-end text-danger" %>
+
+        <div class="card-body bg-warning p-3">
+          <div class="flip-card" style="width: 100%">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <h5 class="card-title text-primary"><%= closet.name %></h5>
+                <p class="card-text lh-1"><small>location: <%= closet.location %></small></p>
+                <p class="card-text lh-1"><small>features: <%= closet.features %></small></p>
+                <p class="card-text lh-1"><small>Accesibility: <%= closet.accessibility %></small></p>
+                <p class="card-text lh-1"><small>Average Rating: <% if closet.closet_reviews.any? %><%= closet.closet_reviews.average(:rating).to_f.round(1) %><% else %>
+                  No reviews yet <% end %></small></p>
+                <p class="card-text lh-1 d-flex justify-content-end"><small>Reviews ➡︎ </small></p>
+              </div>
+              <div class="flip-card-back">
+                <p class="card-text lh-1"> Reviews: </p>
+                  <% if closet.closet_reviews.any? %>
+                  <ul>
+                    <% closet.closet_reviews.each do |review| %>
+                      <li>"<%= review.comment %>"</li>
+                  <% end %>
+                  </ul>
+                  <% else %>
+                    <p>No reviews yet</p>
+                  <% end %>
+              </div>
+            </div>
+          </div>
+          <%= link_to "Send booking request", new_closet_booking_path(closet.id), class:"btn btn-primary text-decoration-none d-flex justify-content-center text-white" %> <br>
         </div>
       </div>
     </div>
