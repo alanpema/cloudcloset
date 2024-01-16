@@ -1,14 +1,18 @@
 <div data-search-items-target="list">
   <p class="h3">
     <% if params[:query].blank? %>
-      <%= pluralize items.count, "item" %> available
+      <%= pluralize current_user.not_booked_items.count, "item" %> available
     <% else %>
       <%= pluralize items.count, "result" %> for <code><%= params[:query] %></code>
     <% end %>
   </p>
-  <div class="items">
-    <% current_user.not_booked_items.each do |item| %>
-      <%= render "items/item_infos", item: item %>
-    <% end %>
+
+  <div data-controller="items">
+    <input type="checkbox" data-action="change->items#toggleAll">
+    <div class="items">
+      <% current_user.not_booked_items.each do |item| %>
+        <%= render "items/item_infos", item: item %>
+      <% end %>
+    </div>
   </div>
 </div>
