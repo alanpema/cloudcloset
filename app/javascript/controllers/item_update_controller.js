@@ -20,7 +20,7 @@ export default class extends Controller {
       .then((data) => {
         this.cardTarget.outerHTML = data
       })
-      setTimeout(() => this.markedAsChecked(), 200);
+      setTimeout(() => this.markedAsChecked(), 500);
   }
 
   markedAsChecked() {
