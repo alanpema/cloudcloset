@@ -2,6 +2,7 @@ source "https://rubygems.org"
 
 ruby "3.1.2"
 
+
 gem "rails_admin", "3.0"
 
 gem "cloudinary"
@@ -57,6 +58,9 @@ gem "autoprefixer-rails"
 gem "font-awesome-sass", "~> 6.1"
 gem "simple_form", github: "heartcombo/simple_form"
 gem "sassc-rails"
+gem "chartkick"
+gem "groupdate"
+
 
 group :development, :test do
   gem "dotenv-rails"
