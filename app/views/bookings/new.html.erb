@@ -19,19 +19,22 @@
           </div>
 
         <div data-bookings-target="datesForm">
+          <div class="col-6 bg-white p-4 shadow" data-controller="datepicker">
           <%= simple_form_for([@closet, @booking]) do |f| %>
             <%= f.input :pick_up,
                         as: :string,
-                        input_html: { data: { controller: "datepicker" } },
+                        input_html: { data: { datepicker_target: "pickup" }},
                         label: "Pick_up" %>
             <%= f.input :drop_off,
                         as: :string,
-                        input_html: { data: { controller: "datepicker" } },
+                        input_html: { data: { datepicker_target:"dropoff" } },
                         label: "Drop_off" %>
             <%= f.input :items, as: :hidden, input_html: { value: current_user.items.to_json, data: { "bookings-target": "items" } } %>
             <%= f.submit "Book Closet", class: "btn btn-outline-danger", data: { "action": "click->bookings#resetCache" } %>
           <% end %>
+          <p></p>
         </div>
+      </div>
     </div>
   </div>
 </div>

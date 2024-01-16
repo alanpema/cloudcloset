@@ -5,9 +5,11 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = Item.new(item_params)
-    @item.user = current_user
-    @item.save!
+    params[:item][:multiple].to_i.times do
+      @item = Item.new(item_params)
+      @item.user = current_user
+      @item.save!
+    end
     handle_redirect
   end
 
@@ -41,9 +43,13 @@ class ItemsController < ApplicationController
   end
 
   def get_item
-    @item = Item.find(params[:id])
+    @item = Item.find_by(id: params[:id])
     respond_to do |format|
-      format.text { render partial: "items/item_infos", locals: {item: @item}, formats: [:html] }
+      if @item
+        format.text { render partial: "items/item_infos", locals: {item: @item}, formats: [:html] }
+      else
+        format.json { render json: { error: "Item not found" }, status: :not_found }
+      end
     end
   end
 

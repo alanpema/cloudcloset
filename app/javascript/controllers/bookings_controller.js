@@ -6,6 +6,8 @@ export default class extends Controller {
 
   connect() {
     this.resetBookingValues();
+    let itemIds = JSON.parse(localStorage.getItem("items"));
+    this.itemsTarget.value = JSON.stringify(itemIds);
   }
 
   resetCache() {

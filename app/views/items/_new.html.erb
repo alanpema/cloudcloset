@@ -5,6 +5,8 @@
   <%= f.input :item_type, as: :select, collection: Item::ITEM_TYPE, label:"Type" %>
   <%= f.input :fragility, as: :select, collection: Item::FRAGILITY, label:"Fragility" %>
   <%= f.input :size, as: :select, collection: Item::SIZE, label:"Size" %>
+  <%= f.input :multiple, as: :select, collection: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"], label: "Quantity", default: "1" %>
+
 
   <%= f.hidden_field :redirect, value: redirect %>
   <%= f.hidden_field :closet, value: closet&.id %>

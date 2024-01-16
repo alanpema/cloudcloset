@@ -17,10 +17,10 @@ class BookingsController < ApplicationController
     @booking = Booking.new(booking_params)
     @booking.closet = @closet
     @booking.user = current_user
-    @booking.status = "payment_pending"
     if @booking.save
+      @booking.update(status: 0)
       append_items
-      #calculate_final_price(@booking)
+      calculate_final_price
       redirect_to confirmation_path(@booking)
       flash[:notice] = "Your booking has been created"
     else
@@ -41,10 +41,22 @@ class BookingsController < ApplicationController
     @booking.destroy
   end
 
+  def accepted
+    @booking = Booking.find(params[:id])
+    @booking.update(status: 2)
+    redirect_to dashboard_path
+  end
+
+  def declined
+    @booking = Booking.find(params[:id])
+    @booking.update(status: 3)
+    redirect_to dashboard_path
+  end
+
   private
 
   def payment_process
-    @booking.update(status: "acceptance_pending")
+    @booking.update(status: 1)
     redirect_to dashboard_path
   end
 
@@ -56,11 +68,15 @@ class BookingsController < ApplicationController
     end
   end
 
-  #def calculate_final_price
-    #@booking.final_price = 0
-    #Item::ITEM_TYPE_PRICES
-    #Item::ITEM_SIZE_PRICES
-  #end
+  def calculate_final_price
+    final_price = 0
+    @booking.items.each do |item|
+      final_price += (Item::TYPE_PRICES[item.item_type])* (Item::SIZE_PRICES[item.size])
+    end
+    number_of_days = (@booking.drop_off - @booking.pick_up).to_i
+    final_price *= number_of_days
+    @booking.update(final_price: final_price)
+  end
 
   def booking_params
     params.require(:booking).permit(:pick_up, :drop_off, :status, :final_price, :closet_id, :user_id)

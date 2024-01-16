@@ -1,4 +1,10 @@
 <h1>Pay</h1>
-
 <%= @booking.closet.name %>
 <%= link_to "Pay", closet_booking_path(@booking, payment: true), data: { turbo_method: :patch } %>
+
+<% @booking.items.each do |item| %>
+  <h3><%= item.name %></h3>
+  <p>Type: <%= item.item_type %> (<%= item.size %>)</p>
+  <p>Price: <%= (Item::TYPE_PRICES[item.item_type])*(Item::SIZE_PRICES[item.size]) %></p>
+<% end %>
+<p><strong>Total:</strong> <%= @booking.final_price %></p>
