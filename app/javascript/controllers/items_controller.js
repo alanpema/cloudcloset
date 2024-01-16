@@ -18,7 +18,7 @@ export default class extends Controller {
       localStorage.setItem("items", JSON.stringify(items));
     }
 
-    this.checkboxItemTargets.forEach((checkbox) => {
+    document.querySelectorAll("[type=checkbox]").forEach((checkbox) => {
       checkbox.checked = JSON.parse(localStorage.getItem("items"))?.includes(checkbox.id)
     })
 
@@ -27,10 +27,6 @@ export default class extends Controller {
     }
   }
 
-  cacheItem() {
-    debugger
-
-  }
 
   displayCachedItems() {
     this.itemsTarget.innerHTML = ""
@@ -86,6 +82,23 @@ export default class extends Controller {
       .then((data) => {
         this.cardTarget.outerHTML = data
       })
+  }
+
+  toggleAll(event) {
+    if (!event.target.checked) {
+      localStorage.removeItem('items')
+      this.checkboxItemTargets.forEach((checkbox) => {
+        checkbox.checked = false
+      })
+    } else {
+      localStorage.removeItem('items')
+      this.checkboxItemTargets.forEach((checkbox) => {
+        checkbox.checked = true
+        let items = JSON.parse(localStorage.getItem("items")) || [];
+        items.push(checkbox.id);
+        localStorage.setItem("items", JSON.stringify(items));
+      })
+    }
   }
 
   popup() {
