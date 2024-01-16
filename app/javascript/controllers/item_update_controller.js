@@ -20,6 +20,12 @@ export default class extends Controller {
       .then((data) => {
         this.cardTarget.outerHTML = data
       })
+      setTimeout(() => this.markedAsChecked(), 200);
+  }
+
+  markedAsChecked() {
+    let checkbox = document.querySelector(`[type=checkbox]`)
+    checkbox.checked = true
   }
 
   displayForm() {
