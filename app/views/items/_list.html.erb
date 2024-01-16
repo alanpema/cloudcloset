@@ -1,7 +1,7 @@
 <div data-search-items-target="list">
   <p class="h3">
     <% if params[:query].blank? %>
-      <%= pluralize items.count, "item" %> available
+      <%= pluralize current_user.not_booked_items.count, "item" %> available
     <% else %>
       <%= pluralize items.count, "result" %> for <code><%= params[:query] %></code>
     <% end %>
