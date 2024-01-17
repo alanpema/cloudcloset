@@ -25,8 +25,8 @@
                       <% if closet.closet_reviews.any? %>
                       <ul>
                         <% closet.closet_reviews.each do |review| %>
-                          <li>"<%= review.comment %>"</li>
-                          <li>"<%= review.rating.to_i %>"</li>
+                          <li>"<%= review.comment %>" <%= rating_as_stars(review.rating) %></li>
+
                       <% end %>
                       </ul>
                       <% else %>
