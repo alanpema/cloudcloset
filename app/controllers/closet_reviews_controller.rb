@@ -29,6 +29,7 @@ class ClosetReviewsController < ApplicationController
     @closet_review = ClosetReview.find(params[:id])
   end
 
+
   private
 
   def closet_review_params

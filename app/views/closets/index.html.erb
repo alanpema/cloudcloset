@@ -1,47 +1,55 @@
-<div>
-  <% @closets.each do |closet| %>
-    <div class="col-9 col-md-3 p-3">
-      <div class="card-closet p-2" style="width: 35rem; border-raduis: 10px">
-        <% if closet.photo.attached? %>
-           <%= cl_image_tag closet.photo.key, class: "card-img-top", style: "height: 200px; width: 100%; object-fit: cover;", alt: "Card image cap" %>
-        <% end %>
+<div class="container p-3 ml-5 position-relative">
+  <div class="row">
 
-        <div class="card-body bg-warning p-3">
-          <div class="flip-card" style="width: 100%">
-            <div class="flip-card-inner">
-              <div class="flip-card-front">
-                <h5 class="card-title text-primary"><%= closet.name %></h5>
-                <p class="card-text lh-1"><small>location: <%= closet.location %></small></p>
-                <p class="card-text lh-1"><small>features: <%= closet.features %></small></p>
-                <p class="card-text lh-1"><small>Accesibility: <%= closet.accessibility %></small></p>
-                <p class="card-text lh-1"><small>Average Rating: <% if closet.closet_reviews.any? %><%= closet.closet_reviews.average(:rating).to_f.round(1) %><% else %>
-                  No reviews yet <% end %></small></p>
-                <p class="card-text lh-1 d-flex justify-content-end"><small>Reviews ➡︎ </small></p>
+    <div class="col-6">
+      <% @closets.each do |closet| %>
+        <div class="col-9 col-md-3 p-3">
+          <div class="card-closet p-3" style="width: 35rem; border-radius: 20px;">
+            <% if closet.photo.attached? %>
+              <%= cl_image_tag closet.photo.key, class: "card-img-top", style: "height: 200px; width: 100%; object-fit: cover; border-top-right-radius: 20px; border-top-left-radius: 20px; border: 1px solid darkblue; margin: 0; padding: 0;", alt: "Card image cap" %>
+            <% end %>
+
+            <div class="card-body bg-warning" style="height: 200px; margin: 0; padding: 0; border: none;">
+              <div class="flip-card" style="width: 100%">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front p-3">
+                    <h5 class="card-text lh-1 text-primary d-flex justify-content-center"><%= closet.name %></h5>
+                    <p class="card-text lh-1"><small>📍 Location: <%= closet.location %></small></p>
+                    <p class="card-text lh-1"><small> ⚡️ Features: <%= closet.features %></small></p>
+                    <p class="card-text lh-1"><small> 🛗 Accesibility: <%= closet.accessibility %></small></p>
+                    <p class="card-text lh-1"><small> ⭐️ Average Rating: <% if closet.closet_reviews.where.not(rating: nil).any? %><%= closet.closet_reviews.where.not(rating: nil).average(:rating).to_f.round(1) %><% else %>No ratings yet<% end %></small></p>
+                    <p class="card-text lh-1 d-flex justify-content-end"><small>Reviews ➡︎ </small></p>
+                  </div>
+                  <div class="flip-card-back p-3">
+                    <p class="card-text lh-1"> 🗣️ Reviews: </p>
+                      <% if closet.closet_reviews.any? %>
+                      <ul>
+                        <% closet.closet_reviews.each do |review| %>
+                          <li>"<%= review.comment %>"</li>
+                          <li>"<%= review.rating.to_i %>"</li>
+                      <% end %>
+                      </ul>
+                      <% else %>
+                        <p>No reviews yet</p>
+                      <% end %>
+                  </div>
+                </div>
               </div>
-              <div class="flip-card-back">
-                <p class="card-text lh-1"> Reviews: </p>
-                  <% if closet.closet_reviews.any? %>
-                  <ul>
-                    <% closet.closet_reviews.each do |review| %>
-                      <li>"<%= review.comment %>"</li>
-                  <% end %>
-                  </ul>
-                  <% else %>
-                    <p>No reviews yet</p>
-                  <% end %>
-              </div>
+              <%= link_to "Send booking request", new_closet_booking_path(closet.id), class:"btn btn-primary text-decoration-none d-flex justify-content-center text-white", style:"border-bottom-right-radius: 20px; border-bottom-left-radius: 20px;" %> <br>
             </div>
           </div>
-          <%= link_to "Send booking request", new_closet_booking_path(closet.id), class:"btn btn-primary text-decoration-none d-flex justify-content-center text-white" %> <br>
         </div>
+      <%end%>
+    </div>
+
+
+    <div class="col-6 p-4">
+      <div class="always-show-map-container p-5 m-10"
+        data-controller="map"
+        data-map-markers-value="<%= @markers.to_json %>"
+        data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
       </div>
     </div>
-  <%end%>
-</div>
 
-
-<div style="width: 100%; height: 600px;"
-  data-controller="map"
-  data-map-markers-value="<%= @markers.to_json %>"
-  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+  </div>
 </div>
