@@ -8,7 +8,7 @@
   </p>
 
   <div data-controller="items">
-    <input type="checkbox" data-action="change->items#toggleAll">
+    <h1>Select all |<input type="checkbox" data-action="change->items#toggleAll">|</h1>
     <div class="items">
       <% current_user.not_booked_items.each do |item| %>
         <%= render "items/item_infos", item: item %>
