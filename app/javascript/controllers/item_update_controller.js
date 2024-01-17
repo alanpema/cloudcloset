@@ -30,5 +30,6 @@ export default class extends Controller {
 
   displayForm() {
     this.formTarget.classList.toggle("d-none")
+    this.infosTarget.classList.toggle("d-none")
   }
 }

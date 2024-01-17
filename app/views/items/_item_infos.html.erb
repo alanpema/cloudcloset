@@ -1,7 +1,7 @@
 
 <div class="item-card" data-controller="item-update" data-item-update-target="card" data-item-update-target="infos">
   <%= cl_image_tag item.photo.key, style: "height: 120px; width:100%;"%>
-  <div class="item-infos p-3" data-items-target="infos">
+  <div class="item-infos p-3" data-item-update-target="infos">
       <p>👉 Name: <%= item.name %></p>
       <hr>
       <p> 📦 Type: <%= item.item_type %></p>
@@ -20,10 +20,12 @@
           </p>
       </div>
       <%= @selected_items << item if params[:selected_item] %>
+
       <button aria-label="Edit item">
         <i class="fa-solid fa-pen fa-xs ml-2" data-action="click->item-update#displayForm"></i>
       </button>
   </div>
+
   <%= simple_form_for item, html: {class: "d-none"},
     data: {
     item_update_target: "form",
@@ -33,6 +35,9 @@
       <%= f.input :item_type, as: :select, collection: Item::ITEM_TYPE, label:"Type" %>
       <%= f.input :fragility, as: :select, collection: Item::FRAGILITY, label:"Fragility" %>
       <%= f.input :size, as: :select, collection: Item::SIZE, label:"Size" %>
-      <%= f.submit class: "btn btn-outline-danger" %>
+      <div class="d-flex justify-content-between">
+        <%= f.submit class: "btn btn-primary" %>
+        <a class="btn btn-outline-danger" data-action="click->item-update#displayForm">X</a>
+      </div>
     <% end %>
 </div>
