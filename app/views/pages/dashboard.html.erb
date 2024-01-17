@@ -1,6 +1,6 @@
 <%# profile card start %>
 <div class="container col-12 p-2 d-flex align-items-center justify-content-center">
-  <div class="profile-card d-flex bg-white col-9">
+  <div class="profile-card d-flex bg-white col-6">
     <div class="profile-card-pic">
       <% if current_user.photo.attached? %>
         <div class="pc-pic">
@@ -16,11 +16,17 @@
       <p> Whatsapp: <%= current_user.phone_number %> </p>
       <p> Location: <%= current_user.location %> </p>
     </div>
-    <div></div>
   </div>
 </div>
-
 <%# profile card end%>
+
+<%# reviews start %>
+<div class="container col-12 p-2 d-flex align-items-center justify-content-center">
+  <div class="reviews-card d-flex bg-white col-6">
+    <div class="reviews-card-">
+
+
+<%# reviews end %>
 <% if current_user.host? %>
 
 <%= line_chart Booking.where(status: 2).group_by_day(:created_at).sum("CAST(final_price AS decimal)"), height: "500px", library: { title: { text: "Earnings per day", x: -20 }, yAxis: { title: { text: "Earnings" } }, xAxis: { title: { text: "Date" } } } %>
@@ -77,6 +83,7 @@
 
 
 <% else %>
+<%# owner start %>
 
   <div class="container my-4">
     <div class="row d-flex justify-content-center">
@@ -104,11 +111,11 @@
           <% booking.items.each do |item| %>
             <p> <%= item.name %> </p>
           <% end %>
+          <div class="btn btn-outline-primary">
+            <%= link_to "See al info and review", closet_booking_path(booking.closet, booking), class: "text-decoration-none" %>
+          </div>
           </div>
         </div>
-      </div>
-      <div class="btn btn-outline-primary">
-        <%= link_to "See al info", closet_booking_path(booking.closet, booking) %>
       </div>
     <% end %>
 <% end %>
