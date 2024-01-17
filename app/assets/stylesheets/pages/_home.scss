@@ -6,9 +6,84 @@ body::before {
   height: 100%;
   width: 100%;
   z-index: -1;
-  background-image: url('background.jpg');
-  background-repeat: repeat;
-  background-size: 30%;
-  opacity: 0.5;
+  background-image: url('gradient.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  transform: rotate(180deg);
 }
 // Specific CSS for your home-page
+
+.box img {
+  width: 43.5vw;// 50% del ancho de la ventana
+  height: auto; // mantener la proporción de la imagen
+}
+.cloudlogo{
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.cloudlogo img{
+  width: 100%;
+  height: auto;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+  right: 0;
+}
+
+.slogan {
+  width: 100%;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+  background-color: $brown;
+  padding: 20px;
+  padding-top: 26px;
+}
+
+.login{
+  margin-top: 6px;
+  margin-bottom: 6px;
+  background-color: transparent;
+  border-radius: 50px;
+  padding-left: 10px;
+  padding-bottom: 0;
+  padding-top: 0;
+}
+
+.right-home1{
+  height: 100vh;
+}
+
+.left-home1{
+  height: 100vh;
+}
+
+.register{
+  width: 100%;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+  margin-bottom: 22px;
+  margin-top: 4px;
+  padding: 23.5px;
+
+}
+
+.description{
+  width: 100%;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+  background-color: $brown;
+  padding: 20px;
+  padding-top: 26px;
+  margin-bottom: 22px;
+}
+
+.cachy{
+  width: 100%;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+  background-color: $dark-blue;
+  padding: 20px;
+  margin-top: 22px;
+  padding-top: 26px;
+}
