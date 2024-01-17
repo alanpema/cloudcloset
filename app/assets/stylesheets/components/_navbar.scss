@@ -1,12 +1,32 @@
 .navbar-lewagon {
   justify-content: space-between;
   background: white;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .navbar-lewagon .navbar-collapse {
   flex-grow: 0;
 }
 
-.navbar-lewagon .navbar-brand img {
-  width: 40px;
+.user-avatar img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  margin-left: 5px;
+}
+
+.dropdown-menu{
+  background-color: white;
+}
+
+.navlogo img{
+  width: auto;
+  height: 50px;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  margin-right: 5px;
+
 }
