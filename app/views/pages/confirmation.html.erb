@@ -1,12 +1,30 @@
 <div class="container">
-  <h1>Your booking information</h1>
-  <%= @booking.closet.name %>
-  <%= link_to "Pay", closet_booking_path(@booking, payment: true), data: { turbo_method: :patch } %>
+  <div class="card bg-white p-4 shadow" style="border-radius: 20px; margin: 20px">
+    <div class="d-flex justify-content-center"><h1>Your confirmation</h1></div>
+        <h4>☁️ Closet information</h4>
+        <p>Closet Name: <%= @booking.closet.name %></p>
+        <p>Dates: <%= @booking.pick_up %> to <%= @booking.drop_off %></p>
+      <hr>
+        <h4>📞 Host information</h4>
+        <p>Name: <%= @booking.closet.user.first_name %></p>
+        <p>Phone number: <%= @booking.closet.user.phone_number %></p>
+        <p>Email: <%= @booking.closet.user.email %></p>
+      <hr>
+        <h4>📦 Item Details</h4>
+          <% @booking.items.each do |item| %>
+            <div class="d-flex justify-content-between">
+              <p><%= item.name %></p>
+              <p><%= item.item_type %> (<%= item.size %>) </p>
+              <p><%= (Item::TYPE_PRICES[item.item_type])*(Item::SIZE_PRICES[item.size]) %> $ x <%= number_of_days = (@booking.drop_off - @booking.pick_up).to_i %> days</p>
 
-  <% @booking.items.each do |item| %>
-    <h3><%= item.name %></h3>
-    <p>Type: <%= item.item_type %> (<%= item.size %>)</p>
-    <p>Price: <%= (Item::TYPE_PRICES[item.item_type])*(Item::SIZE_PRICES[item.size]) %></p>
-  <% end %>
-  <p><strong>Total:</strong> <%= @booking.final_price %></p>
+            </div>
+          <% end %>
+            <hr>
+            <div class="d-flex justify-content-end">
+                <p><strong>Total:</strong> <%= number_with_precision(@booking.final_price, precision: 2) %></p>
+            </div>
+              <div class="d-flex justify-content-end">
+                <%= button_to "Pay", closet_booking_path(@booking, payment: true), data: { turbo_method: :patch }, class:"btn btn-primary"%>
+              </div>
+  </div>
 </div>
