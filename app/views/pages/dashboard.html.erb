@@ -1,32 +1,26 @@
-<div class="container my-3">
-  <div class="justify-content-center">
-    <div class="col-lg-12 col-md-10 col-sm-12 bg-white tp-2 shadow d-flex justify-content-between">
-      <div class="d-flex">
-        <% if current_user.photo.attached? %>
-        <div>
-          <%= cl_image_tag current_user.photo.key, class: "rounded img-fluid border-2 ", style: "height: 100px; width:105px;" %>
+<%# profile card start %>
+<div class="container col-12 p-2 d-flex align-items-center justify-content-center">
+  <div class="profile-card d-flex bg-white col-9">
+    <div class="profile-card-pic">
+      <% if current_user.photo.attached? %>
+        <div class="pc-pic">
+          <%= cl_image_tag current_user.photo.key %>
         </div>
-        <% end %>
-        <div class= "mx-3 mt-3">
-          <div class="d-flex">
-            <h4> <%= current_user.first_name %> <%= current_user.last_name %> </h4>
-            <p class="mx-3"> Email: <%= current_user.email %> </p>
-            <p> Whatsapp: <%= current_user.phone_number %> </p>
-          </div>
-          <div class="d-flex">
-            <p> Location: <%= current_user.location %> </p>
-          </div>
-        </div>
-      </div>
-      <div>
-        <%= link_to "Log out", destroy_user_session_path, class: "btn btn-danger" %>
-        <button type="button" class="btn btn-info"><%= link_to "Edit Profile", edit_user_registration_path, class:"text-decoration-none text-white"%></button>
-      </div>
+      <% end %>
     </div>
+    <div class="pc-info">
+      <h2 class="full-name"><%= current_user.first_name %> <%= current_user.last_name %>
+        <button type="button" class="btn btn-outline-light rounded-pill ms-2"><%= link_to "Edit my info", edit_user_registration_path, class:"text-decoration-none"%></button>
+      </h2>
+      <p class=""> Email: <%= current_user.email %> </p>
+      <p> Whatsapp: <%= current_user.phone_number %> </p>
+      <p> Location: <%= current_user.location %> </p>
+    </div>
+    <div></div>
   </div>
 </div>
 
-
+<%# profile card end%>
 <% if current_user.host? %>
 
 <%= line_chart Booking.where(status: 2).group_by_day(:created_at).sum("CAST(final_price AS decimal)"), height: "500px", library: { title: { text: "Earnings per day", x: -20 }, yAxis: { title: { text: "Earnings" } }, xAxis: { title: { text: "Date" } } } %>
@@ -83,7 +77,6 @@
 
 
 <% else %>
-  <h3>I'm an Owner</h3>
 
   <div class="container my-4">
     <div class="row d-flex justify-content-center">
