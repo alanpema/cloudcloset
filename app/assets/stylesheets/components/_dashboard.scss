@@ -1,3 +1,65 @@
+//start profile-card
+.profile-card{
+  height: 150px;
+  width: 100%;
+  border-radius: 50px;
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+
+}
+.pc-pic{
+  height: 100%;
+  width: 150px;
+  border-radius: 50px;
+  overflow: hidden;
+}
+.pc-pic img{
+  height: 100%;
+  width: 100%;
+}
+
+.pc-name{
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+.full-name{
+  color: $blue;
+  font-weight: bold;
+}
+
+.pc-info{
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-top: 12px;
+}
+
+.pc-info p{
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//end profile-card
 .card-product {
   overflow: hidden;
   height: 130px;
