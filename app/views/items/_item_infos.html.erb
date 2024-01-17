@@ -1,13 +1,24 @@
 
 <div class="item-card" data-controller="item-update" data-item-update-target="card" data-item-update-target="infos">
-  <%= cl_image_tag item.photo.key, style: "height: 120px; width:200px;"%>
-  <div class="item-infos" data-items-target="infos">
-      <p><%= item.name %></p>
-      <p><%= item.item_type %></p>
-      <p><%= item.fragility %></p>
-      <p><%= item.size %></p>
-      <p> <%= link_to "🗑️ Delete", item_path(item), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }%> </p>
-      <%= check_box_tag item.id, data: {action: "change->items#cacheItem change->bookings#removeItemFromCache", "bookings-target": "checkboxItem", "items-target": "checkboxItem"} %>
+  <%= cl_image_tag item.photo.key, style: "height: 120px; width:100%;"%>
+  <div class="item-infos p-3" data-items-target="infos">
+      <p>👉 Name: <%= item.name %></p>
+      <hr>
+      <p> 📦 Type: <%= item.item_type %></p>
+      <hr>
+      <p> 🚨 Fragility: <%= item.fragility %></p>
+      <hr>
+      <p> 📏 Size: <%= item.size %></p>
+      <hr>
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div style="display: flex; align-items: center;">
+          <%= check_box_tag item.id, data: {action: "change->items#cacheItem change->bookings#removeItemFromCache", "bookings-target": "checkboxItem", "items-target": "checkboxItem"} %>
+          <span style="margin-left: 6px;">Select</span>
+        </div>
+          <p style="margin: 0;">
+          <%= link_to "Delete 🗑️", item_path(item), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class:"text-decoration-none text-secondary"%>
+          </p>
+      </div>
       <%= @selected_items << item if params[:selected_item] %>
       <button aria-label="Edit item">
         <i class="fa-solid fa-pen fa-xs ml-2" data-action="click->item-update#displayForm"></i>
