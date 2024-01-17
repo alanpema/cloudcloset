@@ -32,18 +32,18 @@ class ClosetsController < ApplicationController
     redirect_to dashboard_path
   end
 
-def index
-  @closets = Closet.all
-  @selected_ids = params[:selected_ids]
-  @markers = @closets.geocoded.map do |closet|
-    {
-      lat: closet.latitude,
-      lng: closet.longitude,
-      info_window_html: render_to_string(partial: "info_window", locals: {closet: closet}),
-      marker_html: render_to_string(partial: "marker", locals: {closet: closet})
-    }
+  def index
+    @closets = Closet.all
+    @selected_ids = params[:selected_ids]
+    @markers = @closets.geocoded.map do |closet|
+      {
+        lat: closet.latitude,
+        lng: closet.longitude,
+        info_window_html: render_to_string(partial: "info_window", locals: {closet: closet}),
+        marker_html: render_to_string(partial: "marker", locals: {closet: closet})
+      }
+    end
   end
-end
 
   private
 

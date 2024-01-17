@@ -1,2 +1,3 @@
 <h2><%= closet.name %></h2>
 <p><%= closet.location %></p>
+<%= link_to "Send booking request", new_closet_booking_path(closet.id), class:"btn btn-primary text-decoration-none d-flex justify-content-center text-white" %>
