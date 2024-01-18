@@ -44,54 +44,50 @@
   margin-top: 5px;
   margin-bottom: 5px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //end profile-card
-.card-product {
-  overflow: hidden;
-  height: 130px;
-  background: white;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  display: flex;
-  align-items: center;
-}
-
-.card-product img {
-  height: 100%;
-  width: 130px;
-  object-fit: cover;
-}
-
-.card-product h2 {
-  font-size: 16px;
-  font-weight: bold;
+//start current-booking
+.booking-title{
   margin: 0;
+  margin-top: 20px;
 }
 
-.card-product p {
-  font-size: 12px;
-  line-height: 1.4;
-  opacity: .7;
-  margin-bottom: 0;
-  margin-top: 8px;
+.bookings-card{
+  height: auto;
+  border-radius: 50px;
+}
+.bc-closet-name{
+  border-radius: 50px;
+  background-color: white;
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
-.card-product .card-product-infos {
-  padding: 16px;
-  width: 100%;
+.deliverys{
+  height: auto;
+  margin-top: 15px;
+  background-color: white;
+  padding: 20px;
+  padding-left: 30px;
+  border-radius: 50px;
+}
+
+.listitems{
+  height: auto;
+  margin-top: 25px;
+  background-color: white;
+  padding: 20px;
+  padding-left: 30px;
+  border-radius: 50px;
+
+}
+
+.badge{
+  border-radius: 50px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 25px;
 }
