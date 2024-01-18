@@ -17,8 +17,10 @@
                     <p class="card-text lh-1"><small>📍 Location: <%= closet.location %></small></p>
                     <p class="card-text lh-1"><small> ⚡️ Features: <%= closet.features %></small></p>
                     <p class="card-text lh-1"><small> 🛗 Accesibility: <%= closet.accessibility %></small></p>
-                    <p class="card-text lh-1"><small> ⭐️ Average Rating: <% if closet.closet_reviews.where.not(rating: nil).any? %><%= closet.closet_reviews.where.not(rating: nil).average(:rating).to_f.round(1) %><% else %>No ratings yet<% end %></small></p>
-                    <p class="card-text lh-1 d-flex justify-content-end"><small>Reviews ➡︎ </small></p>
+                      <div class="d-flex justify-content-between">
+                        <p class="card-text lh-1"><small> ⭐️ Average Rating: <% if closet.closet_reviews.where.not(rating: nil).any? %><%= closet.closet_reviews.where.not(rating: nil).average(:rating).to_f.round(1) %><% else %>No ratings yet<% end %></small></p>
+                        <p class="card-text lh-1"><small>Reviews ➡︎ </small></p>
+                      </div>
                   </div>
                   <div class="flip-card-back p-3" style="height: 170px; overflow-y: auto;">
                     <p class="card-text lh-1"> 🗣️ Reviews: </p>
