@@ -1,38 +1,102 @@
 <% if current_user.host? %>
-
-  <h1>user review</h1>
-
-  <div class="container my-4">
-    <div class="row d-flex justify-content-center">
-      <div class="col-6 bg-white p-4 shadow">
-          <%= simple_form_for(@user_review) do |f| %>
-            <%= f.input :comment, label:"Leave a comment" %>
-            <label for="rating" class="form-label">Rate <%=@closet.name %></label>
-            <div class="d-flex justify-content-between">
-              <p>1</p>
-              <p>2</p>
-              <p>3</p>
-              <p>4</p>
-              <p>5</p>
-            </div>
-              <input type="range" class="form-range" min="1" max="5" id="rating" name="rating">
-              <div class="d-flex justify-content-between">
-                <p>Really bad</p>
-                <p>Excellent</p>
-              </div>            <%= f.hidden_field :booking_id, value: @booking.id %>
-            <%= f.submit class: "btn btn-outline-danger" %>
+<div class="container p-2">
+  <h1>Booking information</h1>
+    <div class="row">
+      <div class="col-6 bg-white p-4 shadow mx-auto" style="width: 600px; border-radius: 20px; margin: 20px">
+        <h4>☁️ Closet information</h4>
+          <p><strong>Closet Name: </strong><%= @booking.closet.name %></p>
+          <p><strong>Dates:</strong> <%= @booking.pick_up %> to <%= @booking.drop_off %></p>
+          <p><strong>Location: </strong><a href="https://www.google.com/maps/search/?api=1&query=<%= @booking.closet.location %>" target="_blank"><%= @booking.closet.location %></a></p>
+          <hr>
+        <h4>📞 Item owner information</h4>
+          <% if @booking.items.any? %>
+            <% owner = @booking.items.first.user %>
+            <p><strong>Name: </strong><%= owner.first_name %> <%= owner.last_name %></p>
+            <p><strong>Phone number: </strong><%= owner.phone_number %> <a href="https://wa.me/<%= owner.phone_number %>" target="_blank"><i class="fa-brands fa-whatsapp fa-1x"></i></a></p>
+            <p><strong>Email: </strong><a href="mailto:<%= owner.email %>" target="_blank"><%= owner.email %></a></p>
+          <% else %>
+            <p>No items in this booking.</p>
           <% end %>
       </div>
+
+      <div class="col-6 bg-white p-4 shadow mx-auto" style="width: 600px; border-radius: 20px; margin: 20px;">
+        <div class="mb-2">
+          <h4> ✍️ Review for the Items Owner</h4>
+        </div>
+        <%= simple_form_for(@user_review) do |f| %>
+          <%= f.input :comment, label:"Leave a comment" %>
+            <label for="rating" class="form-label">Rate <%=@closet.name %></label>
+              <div class="d-flex justify-content-between">
+                <p>1</p>
+                <p>2</p>
+                <p>3</p>
+                <p>4</p>
+                <p>5</p>
+              </div>
+            <input type="range" class="form-range" min="1" max="5" id="rating" name="rating">
+          <div class="d-flex justify-content-between">
+            <p>Really bad</p>
+            <p>Excellent</p>
+          </div>
+          <%= f.hidden_field :booking_id, value: @booking.id %>
+          <%= f.submit class: "btn btn-primary" %>
+        <% end %>
+      </div>
     </div>
+
+    <div class="card col-12 bg-white p-4 shadow d-flex justify-content-center mx-auto" style="border-radius: 20px; margin: 20px">
+      <h4>📦 Item Details</h4>
+        <div class="d-flex">
+          <% @booking.items.each do |item| %>
+            <div class="item-card", style="height: 320px; width:250px; margin: 10px;">
+              <%= cl_image_tag item.photo.key, style: "height: 120px; width:100%;"%>
+                <div class="item-infos p-3" data-item-update-target="infos">
+                    <p><strong>🪪 Name: </strong><%= item.name %></p>
+                    <hr>
+                    <p> <strong>📦 Type: </strong><%= item.item_type %></p>
+                    <hr>
+                    <p> <strong>🚨 Fragility: </strong><%= item.fragility %></p>
+                    <hr>
+                    <p> <strong>📏 Size: </strong><%= item.size %></p>
+                </div>
+            </div>
+        <% end %>
+      </div>
+          <hr>
+          <div class="d-flex justify-content-end">
+            <p><strong>Total:</strong> <%= number_with_precision(@booking.final_price, precision: 2) %></p>
+          </div>
+      </div>
+        <div class="d-flex justify-content-end mb-3">
+          <%= link_to 'Return to Dashboard', dashboard_path, class: 'btn btn-primary' %>
+        </div>
   </div>
+
 
 <% else %>
 
-  <h1>closet review</h1>
 
-  <div class="container my-4">
-    <div class="row d-flex justify-content-center">
-      <div class="col-6 bg-white p-4 shadow">
+
+  <div class="container p-2">
+    <h1>Booking information</h1>
+    <div class="row">
+      <div class="col-6 bg-white p-4 shadow mx-auto" style="width: 600px; border-radius: 20px; margin: 20px">
+        <h4>☁️ Closet information</h4>
+          <p><strong>Closet Name: </strong><%= @booking.closet.name %></p>
+          <p><strong>Dates:</strong> <%= @booking.pick_up %> to <%= @booking.drop_off %></p>
+          <p><strong>Location: </strong><a href="https://www.google.com/maps/search/?api=1&query=<%= @booking.closet.location %>" target="_blank"><%= @booking.closet.location %></a></p>
+          <hr>
+        <h4>📞 Host information</h4>
+          <p>Name: <%= @booking.closet.user.first_name %></p>
+          <p>Phone number: <%= @booking.closet.user.phone_number %> <a href="https://wa.me/<%= @booking.closet.user.phone_number %>" target="_blank"><i class="fa-brands fa-whatsapp fa-1x"></i></a></p>
+          <p>Email: <a href="mailto:<%= @booking.closet.user.email %>" target="_blank"><%= @booking.closet.user.email %></a></p>
+      </div>
+
+
+      <div class="col-6 bg-white p-4 shadow mx-auto" style="width: 600px; border-radius: 20px; margin: 20px;">
+        <div class="mb-2">
+          <h4> ✍️ Review for the Closet</h4>
+        </div>
           <%= simple_form_for([@closet, @closet_review]) do |f| %>
             <%= f.input :comment, label:"Leave a comment" %>
             <label for="rating" class="form-label">Rate <%=@closet.name %></label>
@@ -48,10 +112,38 @@
                 <p>Really bad</p>
                 <p>Excellent</p>
               </div>
-            <%= f.submit class: "btn btn-outline-danger" %>
+            <%= f.submit class: "btn btn-primary" %>
           <% end %>
       </div>
     </div>
+
+
+    <div class="card col-12 bg-white p-4 shadow d-flex justify-content-center mx-auto" style="border-radius: 20px; margin: 20px">
+      <h4>📦 Item Details</h4>
+        <div class="d-flex">
+          <% @booking.items.each do |item| %>
+            <div class="item-card", style="height: 320px; width:250px; margin: 10px;">
+              <%= cl_image_tag item.photo.key, style: "height: 120px; width:100%;"%>
+                <div class="item-infos p-3" data-item-update-target="infos">
+                    <p><strong>🪪 Name: </strong><%= item.name %></p>
+                    <hr>
+                    <p> <strong>📦 Type: </strong><%= item.item_type %></p>
+                    <hr>
+                    <p> <strong>🚨 Fragility: </strong><%= item.fragility %></p>
+                    <hr>
+                    <p> <strong>📏 Size: </strong><%= item.size %></p>
+                </div>
+            </div>
+        <% end %>
+      </div>
+          <hr>
+          <div class="d-flex justify-content-end">
+            <p><strong>Total:</strong> <%= number_with_precision(@booking.final_price, precision: 2) %></p>
+          </div>
+      </div>
+        <div class="d-flex justify-content-end mb-3">
+          <%= link_to 'Return to Dashboard', dashboard_path, class: 'btn btn-primary' %>
+        </div>
   </div>
 
 <% end %>

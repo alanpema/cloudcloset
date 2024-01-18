@@ -2,30 +2,29 @@
   <div class="card bg-white p-4 shadow" style="border-radius: 20px; margin: 20px">
     <div class="d-flex justify-content-center"><h1>Your confirmation</h1></div>
         <h4>☁️ Closet information</h4>
-        <p><strong>👉 Closet Name: </strong><%= @booking.closet.name %></p>
-        <p><strong>📅 Dates: </strong><%= @booking.pick_up %> to <%= @booking.drop_off %></p>
-        <p><strong>📍 Location: </strong><a href="https://www.google.com/maps/search/?api=1&query=<%= @booking.closet.location %>" target="_blank"><%= @booking.closet.location %></a></p>
+        <p><strong>Closet Name: </strong><%= @booking.closet.name %></p>
+        <p><strong>Dates: </strong><%= @booking.pick_up %> to <%= @booking.drop_off %></p>
+        <p><strong>Location: </strong><a href="https://www.google.com/maps/search/?api=1&query=<%= @booking.closet.location %>" target="_blank"><%= @booking.closet.location %></a></p>
       <hr>
         <h4>📞 Host information</h4>
-        <p><strong>👉 Name: </strong><%= @booking.closet.user.first_name %></p>
-        <p><strong>☎️ Phone number: </strong><%= @booking.closet.user.phone_number %> <a href="https://wa.me/<%= @booking.closet.user.phone_number %>" target="_blank"><i class="fa-brands fa-whatsapp fa-lg"></i></a></p>
-        <p><strong>📧 Email: </strong><a href="mailto:<%= @booking.closet.user.email %>" target="_blank"><%= @booking.closet.user.email %></a></p>
+        <p><strong>Name: </strong><%= @booking.closet.user.first_name %></p>
+        <p><strong>Phone number: </strong><%= @booking.closet.user.phone_number %> <a href="https://wa.me/<%= @booking.closet.user.phone_number %>" target="_blank"><i class="fa-brands fa-whatsapp fa-1x"></i></a></p>
+        <p><strong>Email:</strong> <a href="mailto:<%= @booking.closet.user.email %>" target="_blank"><%= @booking.closet.user.email %></a></p>
       <hr>
         <h4>📦 Item Details</h4>
           <% @booking.items.each do |item| %>
-            <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-between item-detail">
               <p><%= item.name %></p>
               <p><%= item.item_type %> (<%= item.size %>) </p>
               <p><%= (Item::TYPE_PRICES[item.item_type])*(Item::SIZE_PRICES[item.size]) %> $ x <%= number_of_days = (@booking.drop_off - @booking.pick_up).to_i %> days</p>
-
+              <p><%= (Item::TYPE_PRICES[item.item_type])*(Item::SIZE_PRICES[item.size])*(@booking.drop_off - @booking.pick_up).to_i %> $</p>
             </div>
           <% end %>
-            <hr>
             <div class="d-flex justify-content-end">
-                <p><strong>Total: $</strong><%= number_with_precision(@booking.final_price, precision: 2) %></p>
+                <p><strong>Total:</strong> <%= number_with_precision(@booking.final_price, precision: 2) %> $</p>
             </div>
               <div class="d-flex justify-content-end">
-                <%= link_to "Pay", closet_booking_path(@booking, payment: true), data: { turbo_method: :patch }, class:"btn btn-primary"%>
-              </div>
+                <%= button_to "Pay", closet_booking_path(@booking, payment: true), data: { turbo_method: :patch }, class:"btn btn-primary"%>
+      </div>
   </div>
 </div>
