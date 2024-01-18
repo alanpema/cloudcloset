@@ -20,8 +20,8 @@ class User < ApplicationRecord
   has_many :host_bookings, through: :closets, source: :bookings, dependent: :destroy
 
   # Alan.user_reviews
-  has_many :received_reviews, foreign_key: :reviewee_id, dependent: :destroy # reviews que ha recibido
-  has_many :made_reviews, foreign_key: :reviewer_id, dependent: :destroy # reviews que ha hecho
+  has_many :received_reviews, foreign_key: :reviewee_id, class_name: "UserReview", dependent: :destroy # reviews que ha recibido
+  has_many :made_reviews, foreign_key: :reviewer_id, class_name: "UserReview", dependent: :destroy # reviews que ha hecho
 
   has_many :closet_reviews, foreign_key: :reviewer_id, dependent: :destroy # reviews que ha hecho
 

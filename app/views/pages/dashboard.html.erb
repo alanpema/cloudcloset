@@ -9,7 +9,8 @@
       <% end %>
     </div>
     <div class="pc-info">
-      <h2 class="full-name"><%= current_user.first_name %> <%= current_user.last_name %>
+      <h2 class="full-name d-flex justify-content-between"><%= current_user.first_name %> <%= current_user.last_name %>
+        ⭐️ <% if current_user.received_reviews.where.not(rating: nil).any? %><%= current_user.received_reviews.where.not(rating: nil).average(:rating).to_f.round(1) %><% else %>No ratings yet<% end %></small>
         <button type="button" class="btn btn-outline-light rounded-pill ms-2"><%= link_to "Edit my info", edit_user_registration_path, class:"text-decoration-none"%></button>
       </h2>
       <p class=""> Email: <%= current_user.email %> </p>
@@ -21,11 +22,24 @@
 
 <%# reviews start %>
   <% if current_user.owner? %>
-    <div class="reviews-card d-flex bg-white col-6">
-      <div class="reviews-card-">
-        <p>reviews pending</p>
-      </div>
+<div class="reviews-card d-flex bg-white col-6" style="width: 600px; height: 150px; border-radius: 50px; margin-top: 5px; margin: 20px;">
+  <div class="reviews-card-text">
+    <div class="d-flex justify-content-center" style="width: 600px; color: rgb(149, 207, 216); margin-top: 5px;">
+      <h4>Reviews</h4>
     </div>
+      <div class="text-inside" style="width:600px; height:100px; overflow-y: scroll;">
+        <% if current_user.received_reviews.any? %>
+          <ul>
+            <% current_user.received_reviews.each do |review| %>
+              <li>"<%= review.comment %>" - <%= rating_as_stars(review.rating) %></li>
+            <% end %>
+          </ul>
+        <% else %>
+          <p>No reviews yet</p>
+        <% end %>
+      </div>
+  </div>
+</div>
 <%# reviews end %>
   <% else %>
     <div class="cloudhost col-6">

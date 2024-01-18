@@ -75,7 +75,7 @@ class BookingsController < ApplicationController
     end
     number_of_days = (@booking.drop_off - @booking.pick_up).to_i
     final_price *= number_of_days
-    @booking.update(final_price: final_price)
+    @booking.update(final_price: final_price.round(2))
   end
 
   def booking_params

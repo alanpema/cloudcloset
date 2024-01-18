@@ -16,15 +16,15 @@
             <div class="d-flex justify-content-between item-detail">
               <p><%= item.name %></p>
               <p><%= item.item_type %> (<%= item.size %>) </p>
-              <p><%= (Item::TYPE_PRICES[item.item_type])*(Item::SIZE_PRICES[item.size]) %> $ x <%= number_of_days = (@booking.drop_off - @booking.pick_up).to_i %> days</p>
-              <p><%= (Item::TYPE_PRICES[item.item_type])*(Item::SIZE_PRICES[item.size])*(@booking.drop_off - @booking.pick_up).to_i %> $</p>
+              <p><%= (Item::TYPE_PRICES[item.item_type]*Item::SIZE_PRICES[item.size]).round(2) %> $ x <%= number_of_days = (@booking.drop_off - @booking.pick_up).to_i %> days</p>
+<p><%= (Item::TYPE_PRICES[item.item_type]*Item::SIZE_PRICES[item.size]*number_of_days).round(2) %> $</p>
             </div>
           <% end %>
             <div class="d-flex justify-content-end">
                 <p><strong>Total:</strong> <%= number_with_precision(@booking.final_price, precision: 2) %> $</p>
             </div>
               <div class="d-flex justify-content-end">
-                <%= button_to "Pay", closet_booking_path(@booking, payment: true), data: { turbo_method: :patch }, class:"btn btn-primary"%>
+                <%= link_to "Pay", closet_booking_path(@booking, payment: true), data: { turbo_method: :patch }, class:"btn btn-primary"%>
       </div>
   </div>
 </div>
