@@ -10,6 +10,7 @@ class PagesController < ApplicationController
     @bookings_as_host = Booking.joins(:closet).where(closet: { user_id: current_user.id })
     @item = Item.new
     @closet = Closet.new
+    @is_dashboard = true
   end
 
   def confirmation

@@ -1,46 +1,51 @@
-<h2>Sign up</h2>
+<div class="container d-flex align-items-center justify-content-center">
+  <div class="card col-6 bg-blue p-4 shadow d-flex justify-content-center" style="border-radius: 20px; margin: 20px">
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= f.error_notification %>
+    <h2>Sign up</h2>
 
-  <div class="form-inputs">
-    <%= f.input :photo, as: :file %>
-    <%= f.input :first_name,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "first_name" },
-                placeholder: "Sponge"%>
-    <%= f.input :last_name,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "last_name" },
-                placeholder: "Bob"%>
-    <%= f.input :phone_number,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "phone" },
-                placeholder: "0123456789"%>
-    <%= f.input :email,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "email" },
-                placeholder: "sponge@bob.tech"%>
-    <%= f.input :location,
-      input_html: {data: {address_autocomplete_target: "address"}, class: "d-none"},
-      wrapper_html: {data: {controller: "address-autocomplete", address_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"]}},label:"Location" %>
-    <%= f.input :role, as: :select, collection: User::ROLES, label:"Owner/Host" %>
-    <%= f.input :password,
-                required: true,
-                hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
-                required: true,
-                input_html: { autocomplete: "new-password" } %>
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= f.error_notification %>
+
+      <div class="form-inputs">
+        <%= f.input :photo, as: :file %>
+        <%= f.input :first_name,
+                    required: true,
+                    autofocus: true,
+                    input_html: { autocomplete: "first_name" },
+                    placeholder: "Sponge"%>
+        <%= f.input :last_name,
+                    required: true,
+                    autofocus: true,
+                    input_html: { autocomplete: "last_name" },
+                    placeholder: "Bob"%>
+        <%= f.input :phone_number,
+                    required: true,
+                    autofocus: true,
+                    input_html: { autocomplete: "phone" },
+                    placeholder: "0123456789"%>
+        <%= f.input :email,
+                    required: true,
+                    autofocus: true,
+                    input_html: { autocomplete: "email" },
+                    placeholder: "sponge@bob.tech"%>
+        <%= f.input :location,
+          input_html: {data: {address_autocomplete_target: "address"}, class: "d-none"},
+          wrapper_html: {data: {controller: "address-autocomplete", address_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"]}},label:"Location" %>
+        <%= f.input :role, as: :select, collection: User::ROLES, label:"Owner/Host" %>
+        <%= f.input :password,
+                    required: true,
+                    hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                    input_html: { autocomplete: "new-password" } %>
+        <%= f.input :password_confirmation,
+                    required: true,
+                    input_html: { autocomplete: "new-password" } %>
+      </div>
+
+      <div class="form-actions">
+        <%= f.button :submit, "Register", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+
+    <%= render "devise/shared/links" %>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Register" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
