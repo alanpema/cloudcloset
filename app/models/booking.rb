@@ -1,7 +1,7 @@
 class Booking < ApplicationRecord
   belongs_to :user
   belongs_to :closet
-  has_many :items, dependent: :destroy
+  has_many :items, dependent: :nullify
 
   validates :pick_up, :drop_off, presence: true
 
