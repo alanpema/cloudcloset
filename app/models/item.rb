@@ -5,10 +5,12 @@ class Item < ApplicationRecord
   belongs_to :booking, dependent: :destroy, optional: true
   validates :name, :item_type, :fragility, :size, :photo, presence: true
 
-  ITEM_TYPE = %w(Box Suitcase Sofa Table Chair Bed Desk Bicycle TV Fridge Washing\ Machine)
+  ITEM_TYPE = %w(Box Suitcase Sofa Table Chair Bed Desk Bicycle Screen Instrument)
   TYPE_PRICES = {
     "Box" => 0.5,
     "Suitcase" => 0.6,
+    "Instrument" => 0.6,
+    "Screen" => 0.7,
     "Chair" => 0.7,
     "Bicycle" => 0.7,
     "Table" => 0.9,
