@@ -39,4 +39,5 @@ class User < ApplicationRecord
       item.booking.nil?
     end
   end
+
 end
