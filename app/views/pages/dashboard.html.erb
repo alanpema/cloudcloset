@@ -56,29 +56,49 @@
       <%= link_to "Request a new closet", new_closet_path, class:"btn btn-lg btn-primary rounded-pill text-white mt-2" %>
     </div>
   </div>
-  <% current_user.closets.each do |closet| %>
-    <div class="container my-3">
-      <div class="justify-content-center">
-        <div class="col-lg-12 col-md-10 col-sm-12 bg-white tp-2 shadow d-flex justify-content-between">
-          <div class="d-flex">
-            <div>
-              <%= cl_image_tag closet.photo.key, class: "rounded img-fluid border-2 ", style: "height: 100px; width:105px;" %>
-            </div>
-            <div class= "mx-3 mt-3">
-              <div class="d-flex">
-                <p> <%= closet.name %></p>
-                <p> <%= closet.location %></p>
-                <p> <%= link_to "🗑️ Delete", closet_path(closet), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }%> </p>
+<%#closets %>
+  <div class="container col-12 d-flex">
+    <% current_user.closets.each do |closet| %>
+        <div class="col-6 p-3">
+          <p class="btn btn-danger"> <%= link_to "🗑️ Delete", closet_path(closet), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }%> </p>
+          <div class="card-closet p-3" style="width: 35rem; border-radius: 20px;">
+            <% if closet.photo.attached? %>
+              <%= cl_image_tag closet.photo.key, class: "card-img-top", style: "height: 200px; width: 100%; object-fit: cover; border-top-right-radius: 20px; border-top-left-radius: 20px; border: 1px solid darkblue; margin: 0; padding: 0;", alt: "Card image cap" %>
+            <% end %>
+            <div class="card-body bg-warning" style="height: 200px; margin: 0; padding: 0; border: none;">
+              <div class="flip-card" style="width: 100%">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front p-3">
+                    <h4 class="card-text lh-1 text-primary d-flex justify-content-center"><%= closet.name %></h4>
+                    <p class="card-text lh-1"><small>📍 Location: <%= closet.location %></small></p>
+                    <p class="card-text lh-1"><small> ⚡️ Features: <%= closet.features %></small></p>
+                    <p class="card-text lh-1"><small> 🛗 Accesibility: <%= closet.accessibility %></small></p>
+                    <p class="card-text lh-1"><small> ⭐️ Average Rating: <% if closet.closet_reviews.where.not(rating: nil).any? %><%= closet.closet_reviews.where.not(rating: nil).average(:rating).to_f.round(1) %><% else %>No ratings yet<% end %></small></p>
+                  </div>
+                  <div class="flip-card-back p-3" style="height: 170px; overflow-y: auto;">
+                    <p class="card-text lh-1"> 🗣️ Reviews: </p>
+                      <% if closet.closet_reviews.any? %>
+                      <ul>
+                        <% closet.closet_reviews.each do |review| %>
+                          <li>"<%= review.comment %>" - <%= rating_as_stars(review.rating) %></li>
+                      <% end %>
+                      </ul>
+                      <% else %>
+                        <p>No reviews yet</p>
+                      <% end %>
+                  </div>
+                </div>
               </div>
+              <%= link_to "Change my closet info", edit_closet_path(closet), class:"btn btn-primary text-decoration-none d-flex justify-content-center text-white", style:"border-bottom-right-radius: 20px; border-bottom-left-radius: 20px;" %> <br>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  <% end %>
-
-  <%= line_chart Booking.where(status: 2).group_by_day(:created_at).sum("CAST(final_price AS decimal)"), height: "500px", library: { title: { text: "Earnings per day", x: -20 }, yAxis: { title: { text: "Earnings" } }, xAxis: { title: { text: "Date" } } } %>
-
+      <%end%>
+  </div>
+<%#closets end %>
+  <div class="grafica m-4 p-4 shadow">
+    <%= line_chart Booking.where(status: 2).group_by_day(:created_at).sum("CAST(final_price AS decimal)"), height: "500px", library: { title: { text: "Earnings per day", x: -20 }, yAxis: { title: { text: "Earnings" } }, xAxis: { title: { text: "Date" } } } %>
+  </div>
     <% current_user.host_bookings.each do |booking| %>
       <div class="container my-4">
         <div class="row d-flex justify-content-center">

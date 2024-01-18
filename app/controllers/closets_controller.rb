@@ -1,5 +1,8 @@
 class ClosetsController < ApplicationController
-
+  def edit
+    @closet = Closet.find(params[:id])
+    @closet.save
+  end
   def show
     @closet = Closet.find(params[:id])
     @booking = Booking.new
