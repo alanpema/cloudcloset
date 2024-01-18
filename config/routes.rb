@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   get "get_item/:id", to: "items#get_item", as: :get_item
   resources :items, only: [:show, :new, :create, :edit, :update, :destroy, :index]
 
-  resources :closets, only: [:show, :new, :create, :update, :destroy, :index] do
+  resources :closets, only: [:show, :new, :create, :update, :destroy, :index, :edit] do
     resources :bookings, only: [:new, :create, :show, :edit, :update] do
       member do
         patch :accepted
