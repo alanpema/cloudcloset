@@ -1,18 +1,22 @@
 <div data-search-items-target="list">
-  <p class="h3">
-    <% if params[:query].blank? %>
-      <%= pluralize current_user.not_booked_items.count, "item" %> available
-    <% else %>
-      <%= pluralize items.count, "result" %> for <code><%= params[:query] %></code>
-    <% end %>
-  </p>
-
-  <div data-controller="items">
-    <h1>Select all |<input type="checkbox" data-action="change->items#toggleAll">|</h1>
+  <div class="d-flex justify-content-between mb-3 mt-3">
+    <h2>
+      <% if params[:query].blank? %>
+        <%= pluralize current_user.not_booked_items.count, "item" %> available
+      <% else %>
+        <%= pluralize items.count, "result" %> for <code><%= params[:query] %></code>
+      <% end %>
+    </h2>
+    <div data-controller="items">
+      <h2>Select all <input type="checkbox" data-action="change->items#toggleAll" class="mb-3"></h2>
+    </div>
+    <div>
+      <%= link_to "Continue booking", closets_path, class: "btn btn-info text-white fs-4" %>
+    </div>
+  </div>
     <div class="items">
       <% current_user.not_booked_items.each do |item| %>
         <%= render "items/item_infos", item: item %>
       <% end %>
     </div>
-  </div>
 </div>

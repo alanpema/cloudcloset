@@ -126,14 +126,13 @@
 <%# booking current end%>
 <%# items start %>
   <div class="col-12 d-flex align-items-center justify-content-center">
-    <div class="item-creation d-flex col-12 p-4">
-      <div class="item-creation-form bg-primary col-4">
+    <div class="item-creation d-flex col-12 p-4 ">
+      <div class="item-creation-form bg-white col-4 m-4 p-4">
         <%= render "items/new", items: @items, redirect: true, closet: nil %>
       </div>
-      <div class="created-items col-8">
-        <%= render "items/list", items: @items %>
+      <div class="created-items col-8 m-2 ">
         <div>
-        <%= link_to "Continue Booking", closets_path, class: "btn btn-primary" %>
+        <%= render "items/list", items: @items %>
         </div>
       </div>
     </div>
