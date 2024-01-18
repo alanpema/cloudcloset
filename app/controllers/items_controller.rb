@@ -5,7 +5,9 @@ class ItemsController < ApplicationController
   end
 
   def create
-    params[:item][:multiple].to_i.times do
+    number_of_items = params[:item][:multiple].to_i
+    number_of_items += 1 if number_of_items.zero?
+    number_of_items.times do
       @item = Item.new(item_params)
       @item.user = current_user
       @item.save!
