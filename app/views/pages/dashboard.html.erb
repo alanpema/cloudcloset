@@ -1,5 +1,5 @@
 <%# profile card start %>
-<div class="col-12 d-flex align-items-center justify-content-center">
+<div class="start-profile d-flex align-items-center justify-content-center col-12 m-4">
   <div class="profile-card d-flex bg-white col-6">
     <div class="profile-card-pic">
       <% if current_user.photo.attached? %>
@@ -20,24 +20,28 @@
 <%# profile card end%>
 
 <%# reviews start %>
-  <div class="reviews-card d-flex bg-white col-6">
-    <div class="reviews-card-">
-      <p>reviews pending</p>
-
+  <% if current_user.owner? %>
+    <div class="reviews-card d-flex bg-white col-6">
+      <div class="reviews-card-">
+        <p>reviews pending</p>
+      </div>
     </div>
-  </div>
+<%# reviews end %>
+  <% else %>
+    <div class="cloudhost col-6">
+      <%= image_tag("cloudcloset.png", alt: "cloudcloset") %>
+    </div>
+  <% end %>
 </div>
 
-<%# reviews end %>
 <% if current_user.host? %>
 
-<%= line_chart Booking.where(status: 2).group_by_day(:created_at).sum("CAST(final_price AS decimal)"), height: "500px", library: { title: { text: "Earnings per day", x: -20 }, yAxis: { title: { text: "Earnings" } }, xAxis: { title: { text: "Date" } } } %>
-
-  <h3>I'm a Host</h3>
-  <div class="btn btn-outline-primary">
-    <%= link_to "Request a new closet", new_closet_path %>
+  <div class="container d-flex justify-content-between">
+    <h3 class="booking-title text-center"><strong>My closets</strong></h3>
+    <div>
+      <%= link_to "Request a new closet", new_closet_path, class:"btn btn-lg btn-primary rounded-pill text-white mt-2" %>
+    </div>
   </div>
-
   <% current_user.closets.each do |closet| %>
     <div class="container my-3">
       <div class="justify-content-center">
@@ -58,6 +62,8 @@
       </div>
     </div>
   <% end %>
+
+  <%= line_chart Booking.where(status: 2).group_by_day(:created_at).sum("CAST(final_price AS decimal)"), height: "500px", library: { title: { text: "Earnings per day", x: -20 }, yAxis: { title: { text: "Earnings" } }, xAxis: { title: { text: "Date" } } } %>
 
     <% current_user.host_bookings.each do |booking| %>
       <div class="container my-4">
@@ -85,12 +91,26 @@
 
 <% else %>
 <%# owner start %>
+<%# items start %>
+  <div class="col-12 d-flex align-items-center justify-content-center">
+    <div class="item-creation d-flex col-12 p-4 ">
+      <div class="item-creation-form bg-white col-4 m-4 p-4">
+        <%= render "items/new", items: @items, redirect: true, closet: nil %>
+      </div>
+      <div class="created-items col-8 m-2 ">
+        <div>
+        <%= render "items/list", items: @items %>
+        </div>
+      </div>
+    </div>
+  </div>
+<%# items end %>
 <%# booking current start %>
 <%# pending if current_user.current_booking %>
   <div class="container col-12">
     <h3 class="booking-title text-center"><strong>My bookings</strong></h3>
     <div class="col-12 d-flex row align-items-center justify-content-center">
-      <% current_user.bookings.each do |booking| %>
+      <% current_user.bookings.order(created_at: :desc).each do |booking| %>
           <div class="bookings-card col-12 bg-primary p-4 m-4 shadow">
             <div class="d-flex justify-content-between">
               <h2 class="bc-closet-name text-primary shadow"> <strong><%= booking.closet.name %></strong></h2>
@@ -114,7 +134,7 @@
             </div>
           <div class="d-flex justify-content-between">
             <div>
-              <h2 class="mt-3 text-success">Paid price: <strong><%= booking.final_price %>$</strong></h2>
+              <h2 class="mt-3 text-success">Paid price: <strong><%= number_with_precision(booking.final_price,precision:2) %>$</strong></h2>
             </div>
             <div class="mt-4">
               <%= link_to "See all booking information and review this closet", closet_booking_path(booking.closet, booking), class: "btn btn-info text-decoration-none text-white rounded-pill" %>
@@ -125,20 +145,5 @@
     </div>
   </div>
 <%# booking current end%>
-<%# items start %>
-  <div class="col-12 d-flex align-items-center justify-content-center">
-    <div class="item-creation d-flex col-12 p-4 ">
-      <div class="item-creation-form bg-white col-4 m-4 p-4">
-        <%= render "items/new", items: @items, redirect: true, closet: nil %>
-      </div>
-      <div class="created-items col-8 m-2 ">
-        <div>
-        <%= render "items/list", items: @items %>
-        </div>
-      </div>
-    </div>
-  </div>
-<%# items end %>
 <%# owner end %>
-
-<% end %>
+<% end %> <%#current_user %>
