@@ -9,9 +9,12 @@
       <% end %>
     </div>
     <div class="pc-info">
-      <h2 class="full-name d-flex justify-content-between"><%= current_user.first_name %> <%= current_user.last_name %>
-        ⭐️ <% if current_user.received_reviews.where.not(rating: nil).any? %><%= current_user.received_reviews.where.not(rating: nil).average(:rating).to_f.round(1) %><% else %>No ratings yet<% end %></small>
-        <button type="button" class="btn btn-outline-light rounded-pill ms-2"><%= link_to "Edit my info", edit_user_registration_path, class:"text-decoration-none"%></button>
+      <h2 class="full-name d-flex justify-content-between">
+        <%= current_user.first_name %> <%= current_user.last_name %>
+        <% if current_user.owner? %>
+          ⭐️ <% if current_user.received_reviews.where.not(rating: nil).any? %><%= current_user.received_reviews.where.not(rating: nil).average(:rating).to_f.round(1) %><% else %> <% end %></small>
+        <% end %>
+          <button type="button" class="btn btn-outline-light rounded-pill ms-2"><%= link_to "Edit my info", edit_user_registration_path, class:"text-decoration-none"%></button>
       </h2>
       <p class=""> Email: <%= current_user.email %> </p>
       <p> Whatsapp: <%= current_user.phone_number %> </p>
