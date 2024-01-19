@@ -1,5 +1,5 @@
 
-<div class="item-card" data-controller="item-update" data-item-update-target="card" data-item-update-target="infos">
+<div class="item-card" data-controller="item-update" data-item-update-target="card">
   <%= cl_image_tag item.photo.key, style: "height: 120px; width:100%;"%>
   <div class="item-infos p-3" data-item-update-target="infos">
       <p> 🪪 <strong>Name:</strong> <%= item.name %></p>
@@ -12,7 +12,7 @@
       <hr>
       <div style="display: flex; justify-content: space-between; align-items: center;">
         <div style="display: flex; align-items: center;">
-          <%= check_box_tag item.id, data: {action: "change->items#cacheItem change->bookings#removeItemFromCache", "bookings-target": "checkboxItem", "items-target": "checkboxItem"} %>
+          <%= check_box_tag item.id, data: {action: "change->items#cacheItem change->bookings#removeItemFromCache", "item-update-target": "checkboxItem", "items-target": "checkboxItem"} %>
           <span style="margin-left: 6px;"><strong>Select</strong></span>
         </div>
           <p style="margin: 0;">

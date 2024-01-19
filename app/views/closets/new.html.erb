@@ -1,18 +1,21 @@
-<h1>closet request</h1>
+
 <div class="container my-4">
-  <div class="row d-flex justify-content-center">
-    <div class="col-6 bg-white p-4 shadow">
-        <%= simple_form_for(@closet) do |f| %>
-          <%= f.input :photo, as: :file, label: "Add different room pictures" %>
-          <%= f.input :name, label: "Name your closet" %>
-          <%= f.input :location,
-            input_html: {data: {address_autocomplete_target: "address"}, class: "d-none"},
-            wrapper_html: {data: {controller: "address-autocomplete", address_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"]}},label:"Pick up location 📍" %>
-          <%= f.input :features, label: "Describe your closet" %>
-          <%= f.input :accessibility, label: "How easy is your closet to reach?" %>
-          <%= f.input :state, label: "Tell us about your closet space" %>
-          <%= f.button :submit, "Submit", class: "btn btn-primary" %>
-        <% end %>
+  <div class="d-flex justify-content-center mb-2">
+  <h1>☁️ Closet request</h1>
+  </div>
+    <div class="row d-flex justify-content-center">
+      <div class="col-6 bg-white p-4 shadow" style="border-radius: 20px;">
+          <%= simple_form_for(@closet) do |f| %>
+            <%= f.input :photo, as: :file, label: "Add different room pictures" %>
+            <%= f.input :name, label: "Name your closet" %>
+            <%= f.input :location,
+              input_html: {data: {address_autocomplete_target: "address"}, class: "d-none"},
+              wrapper_html: {data: {controller: "address-autocomplete", address_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"]}},label:"Pick up location 📍" %>
+            <%= f.input :features, label: "Describe your closet" %>
+            <%= f.input :accessibility, label: "How easy is your closet to reach?" %>
+            <%= f.input :state, label: "Tell us about your closet space" %>
+            <%= f.button :submit, "Submit", class: "btn btn-primary" %>
+          <% end %>
+      </div>
     </div>
   </div>
-</div>

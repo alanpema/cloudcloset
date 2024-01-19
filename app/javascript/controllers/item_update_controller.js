@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="items"
 export default class extends Controller {
-  static targets = ["infos", "form", "card"]
+  static targets = ["infos", "form", "card", "checkboxItem"]
 
   connect() {
   }
@@ -24,8 +24,9 @@ export default class extends Controller {
   }
 
   markedAsChecked() {
-    let checkbox = document.querySelector(`[type=checkbox]`)
-    checkbox.checked = true
+    document.querySelectorAll("[type=checkbox]").forEach((checkbox) => {
+      checkbox.checked = JSON.parse(localStorage.getItem("items"))?.includes(checkbox.id)
+    })
   }
 
   displayForm() {
