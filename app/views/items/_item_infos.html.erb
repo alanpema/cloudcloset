@@ -16,7 +16,9 @@
           <span style="margin-left: 6px;"><strong>Select</strong></span>
         </div>
           <p style="margin: 0;">
-          <%= link_to "Delete 🗑️", item_path(item), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class:"text-decoration-none text-secondary"%>
+          <% if defined?(@is_dashboard) && @is_dashboard %>
+            <%= link_to "Delete 🗑️", item_path(item), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class:"text-decoration-none text-secondary"%>
+          <% end %>
           </p>
       </div>
       <%= @selected_items << item if params[:selected_item] %>
