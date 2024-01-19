@@ -109,6 +109,7 @@
           <div class="bookings-card col-12 bg-primary p-4 m-4 shadow">
             <div class="d-flex justify-content-between">
               <h2 class="bc-closet-name text-primary shadow"> <strong><%= booking.user.first_name %> </strong><strong><%= booking.user.last_name %></strong></h2>
+              <h2 class="bc-closet-name text-primary shadow"> <strong><%= booking.closet.name %> </strong></h2>
               <div>
                 <%= render  "bookings/status", booking: booking %>
               </div>
