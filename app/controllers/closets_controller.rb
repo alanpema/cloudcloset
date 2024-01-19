@@ -2,6 +2,8 @@ class ClosetsController < ApplicationController
   def edit
     @closet = Closet.find(params[:id])
     @closet.save
+    if @closet.save
+    end
   end
   def show
     @closet = Closet.find(params[:id])
@@ -25,8 +27,11 @@ class ClosetsController < ApplicationController
 
   def update
     @closet = Closet.find(params[:id])
-    @closet.update(closet_params)
-    @closet.save
+    if @closet.update(closet_params)
+    redirect_to dashboard_path
+    else
+      render :edit
+    end
   end
 
   def destroy
