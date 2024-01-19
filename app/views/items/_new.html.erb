@@ -1,4 +1,4 @@
-<%= simple_form_for(@item) do |f| %>
+<%= simple_form_for(Item.new) do |f| %>
   <h2>Add your items 📦</h2>
   <%= f.input :photo, as: :file, label: "Item picture 📷" %>
   <%= f.input :name, label:"Name" %>

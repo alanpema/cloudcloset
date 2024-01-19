@@ -36,6 +36,8 @@ class ClosetsController < ApplicationController
 
   def destroy
     @closet = Closet.find(params[:id])
+    return if @closet.bookings.any?
+
     @closet.destroy
     redirect_to dashboard_path
   end
