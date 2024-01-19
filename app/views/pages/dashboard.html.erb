@@ -21,28 +21,27 @@
       <p> Location: <%= current_user.location %> </p>
     </div>
   </div>
-<%# profile card end%>
-
-<%# reviews start %>
+  <%# profile card end%>
+  <%# reviews start %>
   <% if current_user.owner? %>
-<div class="reviews-card d-flex bg-white col-6" style="width: 600px; height: 150px; border-radius: 50px; margin-top: 5px; margin: 20px;">
-  <div class="reviews-card-text">
-    <div class="d-flex justify-content-center" style="width: 600px; color: rgb(149, 207, 216); margin-top: 5px;">
-      <h4>Reviews</h4>
-    </div>
-      <div class="text-inside" style="width:600px; height:100px; overflow-y: scroll;">
-        <% if current_user.received_reviews.any? %>
-          <ul>
-            <% current_user.received_reviews.each do |review| %>
-              <li>"<%= review.comment %>" - <%= rating_as_stars(review.rating) %></li>
-            <% end %>
-          </ul>
-        <% else %>
-          <p>No reviews yet</p>
-        <% end %>
+  <div class="reviews-card d-flex bg-white col-6" style="width: 600px; height: 150px; border-radius: 50px; margin-top: 5px; margin: 20px;">
+    <div class="reviews-card-text">
+      <div class="d-flex justify-content-center" style="width: 600px; color: rgb(149, 207, 216); margin-top: 5px;">
+        <h4>Reviews</h4>
       </div>
+        <div class="text-inside" style="width:600px; height:100px; overflow-y: scroll;">
+          <% if current_user.received_reviews.any? %>
+            <ul>
+              <% current_user.received_reviews.each do |review| %>
+                <li>"<%= review.comment %>" - <%= rating_as_stars(review.rating) %></li>
+              <% end %>
+            </ul>
+          <% else %>
+            <p>No reviews yet</p>
+          <% end %>
+        </div>
+    </div>
   </div>
-</div>
 <%# reviews end %>
   <% else %>
 
@@ -52,7 +51,7 @@
 <% if current_user.host? %>
   <div class="container d-flex flex-column align-items-center justify-content-center">
       <div class="container d-flex justify-content-between">
-        <h3 class="booking-title text-center"><strong>My closets</strong></h3>
+        <h2 class="booking-title text-center mb-2"><strong>My closets</strong></h2>
         <div>
           <%= link_to "Request a new closet", new_closet_path, class:"btn btn-lg btn-primary rounded-pill text-white mt-2" %>
         </div>
@@ -62,7 +61,7 @@
       <div class="container row d-flex justify-content-center align-items-center ms-4">
         <% current_user.closets.each do |closet| %>
             <div class="col-6 p-3">
-              <p class="btn btn-danger"> <%= link_to "🗑️ Delete", closet_path(closet), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }%> </p>
+              <p class="btn btn-danger rounded-pill"> <%= link_to "🗑️ Delete", closet_path(closet), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"}, class:"text-white text-decoration-none" %> </p>
               <div class="card-closet p-3" style="width: 35rem; border-radius: 20px;">
                 <% if closet.photo.attached? %>
                   <%= cl_image_tag closet.photo.key, class: "card-img-top", style: "height: 200px; width: 100%; object-fit: cover; border-top-right-radius: 20px; border-top-left-radius: 20px; border: 1px solid darkblue; margin: 0; padding: 0;", alt: "Card image cap" %>
@@ -99,7 +98,7 @@
       </div>
     <%#closets end %>
   </div>
-  <div class="grafica m-4 p-4 shadow">
+  <div class="grafica m-4 mt-5 p-4 shadow bg-white">
     <%= line_chart Booking.where(status: 2).group_by_day(:created_at).sum("CAST(final_price AS decimal)"), height: "500px", library: { title: { text: "Earnings per day", x: -20 }, yAxis: { title: { text: "Earnings" } }, xAxis: { title: { text: "Date" } } } %>
   </div>
   <%#bookingowner %>
@@ -149,7 +148,7 @@
 <% else %>
 <%# owner start %>
 <%# items start %>
-  <div class="col-12 d-flex align-items-center justify-content-center">
+  <div class="items-space col-12 d-flex align-items-center justify-content-center">
     <div class="item-creation d-flex col-12 p-4 ">
       <div class="item-creation-form bg-white col-4 m-4 p-4">
         <%= render "items/new", items: @items, redirect: true, closet: nil %>

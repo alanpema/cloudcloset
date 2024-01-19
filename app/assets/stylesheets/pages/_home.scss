@@ -19,6 +19,16 @@ body {
 }
 
 // Specific CSS for your home-page
+.inicio {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  padding: 0;
+  margin: 0;
+}
 
 .box img {
   width: 43.5vw;// 50% del ancho de la ventana
@@ -93,4 +103,30 @@ body {
   padding: 20px;
   margin-top: 22px;
   padding-top: 26px;
+}
+
+.precios{
+  width: 100vw;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.precios img{
+  width: 95vw;
+  height: auto;
+  border-radius: 20px;
+  border: 3px solid black
+}
+
+.comparacion{
+  width: 100vw;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.comparacion img{
+  width: 95vw;
+  height: auto;
+  border-radius: 20px;
+  border: 3px solid black
 }
