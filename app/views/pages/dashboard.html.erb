@@ -108,7 +108,7 @@
       <% current_user.host_bookings.order(created_at: :desc).each do |booking| %>
           <div class="bookings-card col-12 bg-primary p-4 m-4 shadow">
             <div class="d-flex justify-content-between">
-              <h2 class="bc-closet-name text-primary shadow"> <strong><%= booking.user.first_name %> </strong><strong><%= booking.user.last_name %></strong></h2>
+              <h2 class="bc-closet-name text-primary shadow"> <strong><%= booking.user.first_name %> </strong><strong><%= booking.user.last_name %></strong> ⭐️ <% if booking.user.received_reviews.where.not(rating: nil).any? %><%= booking.user.received_reviews.where.not(rating: nil).average(:rating).to_f.round(1) %><% else %> <% end %></small></h2>
               <h2 class="bc-closet-name text-primary shadow"> <strong><%= booking.closet.name %> </strong></h2>
               <div>
                 <%= render  "bookings/status", booking: booking %>
