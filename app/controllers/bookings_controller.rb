@@ -17,14 +17,16 @@ class BookingsController < ApplicationController
     @booking = Booking.new(booking_params)
     @booking.closet = @closet
     @booking.user = current_user
-    if @booking.save
+    item_ids = JSON.parse(params.require(:booking).permit(:items)[:items])
+    if item_ids.present? && @booking.save
       @booking.update(status: 0)
-      append_items
+      append_items(item_ids)
       calculate_final_price
       redirect_to confirmation_path(@booking)
       flash[:notice] = "Your booking has been created"
     else
       render :new
+      flash.now[:alert] = "Please select at least one item"
     end
   end
 
@@ -60,9 +62,8 @@ class BookingsController < ApplicationController
     redirect_to dashboard_path
   end
 
-  def append_items
-    items_ids = JSON.parse(params.require(:booking).permit(:items)[:items])
-    items_ids.each do |item_id|
+  def append_items(item_ids)
+    item_ids.each do |item_id|
       item = Item.find(item_id)
       item.update!(booking_id: @booking.id)
     end
